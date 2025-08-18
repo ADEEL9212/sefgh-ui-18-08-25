@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Plus, Trash2, ExternalLink, Check, Link as LinkIcon, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { AnimatedButton } from '@/components/ui/AnimatedButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -260,13 +262,14 @@ export default function Profile() {
   };
 
   return (
-    <motion.div 
-      className="min-h-screen bg-background"
-      initial="initial"
-      animate="animate"
-      variants={pageVariants}
-      transition={{ duration: shouldReduceMotion ? 0 : 0.3 }}
-    >
+    <PageTransition>
+      <motion.div 
+        className="min-h-screen bg-background"
+        initial="initial"
+        animate="animate"
+        variants={pageVariants}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.3 }}
+      >
       {/* Enhanced Header with gradient */}
       <motion.header 
         className="border-b bg-gradient-to-r from-primary/10 via-accent/5 to-transparent backdrop-blur-sm"
@@ -278,7 +281,7 @@ export default function Profile() {
           <div className="flex items-center gap-4">
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button 
+                <AnimatedButton 
                   variant="ghost" 
                   size="sm" 
                   onClick={() => navigate('/')}
@@ -286,7 +289,7 @@ export default function Profile() {
                 >
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   Back
-                </Button>
+                </AnimatedButton>
               </TooltipTrigger>
               <TooltipContent>
                 <p>Return to dashboard</p>
@@ -696,5 +699,6 @@ export default function Profile() {
         </motion.div>
       </div>
     </motion.div>
+    </PageTransition>
   );
 }
