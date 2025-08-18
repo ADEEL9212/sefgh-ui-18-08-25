@@ -10,6 +10,7 @@ import { LanguagePanel } from './panels/LanguagePanel';
 import { ConsolePanel } from './panels/ConsolePanel';
 import { ProxyPanel } from './panels/ProxyPanel';
 import { AllPagesPanel } from './panels/AllPagesPanel';
+import { AnimationShowcase } from './panels/AnimationShowcase';
 import { CanvasPanel } from './CanvasPanel';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
@@ -589,6 +590,8 @@ export const SEFGHApp = () => {
         );
       case 'all-pages':
         return <AllPagesPanel onNavigate={setActiveView} />;
+      case 'animation-showcase':
+        return <AnimationShowcase onNavigate={setActiveView} />;
       case 'docs':
       case 'playground':
       case 'settings':

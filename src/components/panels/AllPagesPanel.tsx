@@ -90,6 +90,14 @@ export const AllPagesPanel = ({ onNavigate }: AllPagesPanelProps) => {
       bgColor: 'bg-indigo-500/10',
     },
     {
+      id: 'animation-showcase',
+      title: 'Animation Showcase',
+      description: 'Explore the enhanced UI animations and interactions',
+      icon: Palette,
+      color: 'text-pink-500',
+      bgColor: 'bg-pink-500/10',
+    },
+    {
       id: 'settings',
       title: 'Settings',
       description: 'Customize your application preferences',
