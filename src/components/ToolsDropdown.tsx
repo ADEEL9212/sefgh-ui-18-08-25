@@ -12,13 +12,13 @@ interface Tool {
 
 interface ToolsDropdownProps {
   onToggleGithubSearch?: () => void;
-  onOpenCanvas?: () => void;
+  onOpenWorkbench?: () => void;
   className?: string;
 }
 
 export const ToolsDropdown: React.FC<ToolsDropdownProps> = ({ 
   onToggleGithubSearch,
-  onOpenCanvas,
+  onOpenWorkbench,
   className = ''
 }) => {
   const navigate = useNavigate();
@@ -53,10 +53,10 @@ export const ToolsDropdown: React.FC<ToolsDropdownProps> = ({
       action: () => console.log('Web Search tool launched')
     },
     {
-      id: 'canvas',
-      label: 'Canvas',
+      id: 'workbench',
+      label: 'Workbench',
       icon: PenTool,
-      action: () => onOpenCanvas?.()
+      action: () => onOpenWorkbench?.()
     },
     {
       id: 'system-settings',

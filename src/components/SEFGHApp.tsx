@@ -11,7 +11,7 @@ import { ConsolePanel } from './panels/ConsolePanel';
 import { ProxyPanel } from './panels/ProxyPanel';
 import { AllPagesPanel } from './panels/AllPagesPanel';
 import { AnimationShowcase } from './panels/AnimationShowcase';
-import { CanvasPanel } from './CanvasPanel';
+import { WorkbenchPanel, WorkbenchData } from './workbench/WorkbenchPanel';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { ChatService } from '@/services/chatService';
@@ -48,19 +48,21 @@ interface ProxySettings {
   requiresAuth: boolean;
 }
 
-interface CanvasData {
+interface WorkbenchData {
   id: string;
   title: string;
   content: string;
   mode: 'markdown' | 'code' | 'text';
+  language?: string;
   lastModified: Date;
+  version?: number;
 }
 
 interface AppState {
   theme: 'light' | 'dark';
   isNavOpen: boolean;
   isSearchVisible: boolean;
-  isCanvasOpen: boolean;
+  isWorkbenchOpen: boolean;
   activeView: string;
   selectedVersion: string;
   selectedLanguage: string;
@@ -71,7 +73,7 @@ interface AppState {
   isLoading: boolean;
   canCancelLoading: boolean;
   githubSearchQuery?: string;
-  currentCanvas: CanvasData | null;
+  currentWorkbench: WorkbenchData | null;
   hasUnsavedChanges: boolean;
 }
 
@@ -79,7 +81,7 @@ const initialState: AppState = {
   theme: 'light',
   isNavOpen: false,
   isSearchVisible: false,
-  isCanvasOpen: false,
+  isWorkbenchOpen: false,
   activeView: 'chat',
   selectedVersion: 'v3',
   selectedLanguage: 'en',
@@ -97,7 +99,7 @@ const initialState: AppState = {
   isLoading: false,
   canCancelLoading: false,
   githubSearchQuery: undefined,
-  currentCanvas: null,
+  currentWorkbench: null,
   hasUnsavedChanges: false,
 };
 
@@ -119,7 +121,7 @@ export const SEFGHApp = () => {
         const {
           isNavOpen, // Don't restore - should start closed
           isSearchVisible, // Don't restore - should start closed
-          isCanvasOpen, // Don't restore - should start closed
+          isWorkbenchOpen, // Don't restore - should start closed
           activeView, // Don't restore - should start with 'chat'
           isLoading, // Don't restore - should start false
           canCancelLoading, // Don't restore - should start false
@@ -134,7 +136,7 @@ export const SEFGHApp = () => {
           // Ensure UI state starts with safe defaults
           isNavOpen: false,
           isSearchVisible: false,
-          isCanvasOpen: false,
+          isWorkbenchOpen: false,
           activeView: 'chat',
           isLoading: false,
           canCancelLoading: false,
@@ -175,7 +177,7 @@ export const SEFGHApp = () => {
       chatSessions, // Managed separately by ChatService
       isNavOpen, // Don't persist - should start closed
       isSearchVisible, // Don't persist - should start closed
-      isCanvasOpen, // Don't persist - should start closed
+      isWorkbenchOpen, // Don't persist - should start closed
       activeView, // Don't persist - should start with 'chat'
       isLoading, // Don't persist - should start false
       canCancelLoading, // Don't persist - should start false
@@ -479,75 +481,85 @@ export const SEFGHApp = () => {
     }, 100);
   }, [state.messages, state.chatSessions, updateState, toast]);
 
-  // Canvas handlers
-  const openCanvas = useCallback(() => {
-    if (!state.currentCanvas) {
-      const newCanvas: CanvasData = {
+  // Workbench handlers
+  const openWorkbench = useCallback(() => {
+    if (!state.currentWorkbench) {
+      const newWorkbench: WorkbenchData = {
         id: Math.random().toString(36).substr(2, 9),
-        title: 'Untitled Document',
+        title: 'Untitled Workbench',
         content: '',
         mode: 'markdown',
         lastModified: new Date(),
+        version: 1
       };
       updateState({ 
-        currentCanvas: newCanvas,
-        isCanvasOpen: true,
+        currentWorkbench: newWorkbench,
+        isWorkbenchOpen: true,
         hasUnsavedChanges: false 
       });
     } else {
-      updateState({ isCanvasOpen: true });
+      updateState({ isWorkbenchOpen: true });
     }
-  }, [state.currentCanvas, updateState]);
+  }, [state.currentWorkbench, updateState]);
 
-  const closeCanvas = useCallback(() => {
-    updateState({ isCanvasOpen: false });
+  const closeWorkbench = useCallback(() => {
+    updateState({ isWorkbenchOpen: false });
   }, [updateState]);
 
-  const saveCanvas = useCallback((canvas: CanvasData) => {
+  const saveWorkbench = useCallback((workbench: WorkbenchData) => {
     updateState({ 
-      currentCanvas: canvas,
+      currentWorkbench: workbench,
       hasUnsavedChanges: false 
     });
     
     // Save to localStorage
-    const savedCanvases = JSON.parse(localStorage.getItem('sefgh-canvases') || '[]');
-    const existingIndex = savedCanvases.findIndex((c: CanvasData) => c.id === canvas.id);
+    const savedWorkbenches = JSON.parse(localStorage.getItem('sefgh-workbenches') || '[]');
+    const existingIndex = savedWorkbenches.findIndex((w: WorkbenchData) => w.id === workbench.id);
     
     if (existingIndex >= 0) {
-      savedCanvases[existingIndex] = canvas;
+      savedWorkbenches[existingIndex] = workbench;
     } else {
-      savedCanvases.push(canvas);
+      savedWorkbenches.push(workbench);
     }
     
-    localStorage.setItem('sefgh-canvases', JSON.stringify(savedCanvases));
+    localStorage.setItem('sefgh-workbenches', JSON.stringify(savedWorkbenches));
   }, [updateState]);
 
-  const updateCanvasContent = useCallback((content: string) => {
-    if (state.currentCanvas) {
+  const updateWorkbenchContent = useCallback((content: string) => {
+    if (state.currentWorkbench) {
       updateState({ 
-        currentCanvas: { ...state.currentCanvas, content },
+        currentWorkbench: { ...state.currentWorkbench, content },
         hasUnsavedChanges: true 
       });
     }
-  }, [state.currentCanvas, updateState]);
+  }, [state.currentWorkbench, updateState]);
 
-  const updateCanvasTitle = useCallback((title: string) => {
-    if (state.currentCanvas) {
+  const updateWorkbenchTitle = useCallback((title: string) => {
+    if (state.currentWorkbench) {
       updateState({ 
-        currentCanvas: { ...state.currentCanvas, title },
+        currentWorkbench: { ...state.currentWorkbench, title },
         hasUnsavedChanges: true 
       });
     }
-  }, [state.currentCanvas, updateState]);
+  }, [state.currentWorkbench, updateState]);
 
-  const updateCanvasMode = useCallback((mode: 'markdown' | 'code' | 'text') => {
-    if (state.currentCanvas) {
+  const updateWorkbenchMode = useCallback((mode: 'markdown' | 'code' | 'text') => {
+    if (state.currentWorkbench) {
       updateState({ 
-        currentCanvas: { ...state.currentCanvas, mode },
+        currentWorkbench: { ...state.currentWorkbench, mode },
         hasUnsavedChanges: true 
       });
     }
-  }, [state.currentCanvas, updateState]);
+  }, [state.currentWorkbench, updateState]);
+
+  const updateWorkbenchLanguage = useCallback((language: string) => {
+    if (state.currentWorkbench) {
+      updateState({ 
+        currentWorkbench: { ...state.currentWorkbench, language },
+        hasUnsavedChanges: true 
+      });
+    }
+  }, [state.currentWorkbench, updateState]);
 
   const renderActivePanel = () => {
     switch (state.activeView) {
@@ -558,6 +570,7 @@ export const SEFGHApp = () => {
             key={chatKey} // Add this line
             initialView={state.activeView as 'chat' | 'history'}
             onViewChange={(view) => setActiveView(view)}
+            onOpenWorkbench={openWorkbench}
           />
         );
       case 'language':
@@ -653,15 +666,16 @@ export const SEFGHApp = () => {
             onQueryProcessed={() => updateState({ githubSearchQuery: undefined })}
           />
 
-          <CanvasPanel
-            isOpen={state.isCanvasOpen}
-            canvas={state.currentCanvas}
+          <WorkbenchPanel
+            isOpen={state.isWorkbenchOpen}
+            workbench={state.currentWorkbench}
             hasUnsavedChanges={state.hasUnsavedChanges}
-            onClose={closeCanvas}
-            onSave={saveCanvas}
-            onContentChange={updateCanvasContent}
-            onTitleChange={updateCanvasTitle}
-            onModeChange={updateCanvasMode}
+            onClose={closeWorkbench}
+            onSave={saveWorkbench}
+            onContentChange={updateWorkbenchContent}
+            onTitleChange={updateWorkbenchTitle}
+            onModeChange={updateWorkbenchMode}
+            onLanguageChange={updateWorkbenchLanguage}
           />
         </div>
       </main>
