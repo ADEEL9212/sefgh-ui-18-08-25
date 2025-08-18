@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { AnimatedButton } from '@/components/ui/AnimatedButton';
+import { PageTransition } from '@/components/ui/PageTransition';
 import { 
   ArrowLeft, 
   Key,
@@ -121,7 +123,8 @@ const Settings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <PageTransition>
+      <div className="min-h-screen bg-background flex">
       {/* Sidebar */}
       <div className="w-64 bg-card border-r flex flex-col">
         {/* Logo */}
@@ -180,13 +183,13 @@ const Settings = () => {
         <div className="border-b bg-card/50 backdrop-blur-sm">
           <div className="flex items-center justify-between p-4">
             <div className="flex items-center gap-4">
-              <Button
+              <AnimatedButton
                 onClick={handleBackToChat}
                 className="gap-2 bg-blue-600 hover:bg-blue-700 text-white"
               >
                 <ArrowLeft className="h-4 w-4" />
                 Back to Chat
-              </Button>
+              </AnimatedButton>
             </div>
           </div>
         </div>
@@ -196,7 +199,8 @@ const Settings = () => {
           {renderActivePanel()}
         </div>
       </div>
-    </div>
+      </div>
+    </PageTransition>
   );
 };
 

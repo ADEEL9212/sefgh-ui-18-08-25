@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { HoverCard } from '@/components/ui/HoverCard';
+import { FadeIn } from '@/components/ui/FadeIn';
 import { 
   MessageSquare, 
   History, 
@@ -152,24 +154,25 @@ export const AllPagesPanel = ({ onNavigate }: AllPagesPanelProps) => {
       <div className="mb-8">
         <h2 className="text-xl font-semibold mb-4">All Pages</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {pages.map((page) => (
-            <Card
-              key={page.id}
-              className="cursor-pointer hover:bg-muted/50 transition-all hover:scale-105"
-              onClick={() => onNavigate(page.id)}
-            >
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3">
+          {pages.map((page, index) => (
+            <FadeIn key={page.id} delay={index * 0.1} direction="up">
+              <HoverCard
+                className="cursor-pointer hover:bg-muted/50 transition-all"
+                onClick={() => onNavigate(page.id)}
+              >
+              <div className="p-4">
+                <div className="flex items-center gap-3 mb-3">
                   <div className={`p-2 rounded-lg ${page.bgColor}`}>
                     <page.icon className={`h-5 w-5 ${page.color}`} />
                   </div>
-                  {page.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">{page.description}</p>
-              </CardContent>
-            </Card>
+                  <h3 className="font-semibold">{page.title}</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  {page.description}
+                </p>
+              </div>
+            </HoverCard>
+            </FadeIn>
           ))}
         </div>
       </div>
