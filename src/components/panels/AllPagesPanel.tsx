@@ -164,23 +164,25 @@ export const AllPagesPanel = ({ onNavigate }: AllPagesPanelProps) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {pages.map((page, index) => (
             <FadeIn key={page.id} delay={index * 0.1} direction="up">
-              <HoverCard
+              <div 
                 className="cursor-pointer hover:bg-muted/50 transition-all"
                 onClick={() => onNavigate(page.id)}
               >
-              <div className="p-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className={`p-2 rounded-lg ${page.bgColor}`}>
-                    <page.icon className={`h-5 w-5 ${page.color}`} />
-                  </div>
-                  <h3 className="font-semibold">{page.title}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {page.description}
-                </p>
-              </div>
-            </HoverCard>
-            </FadeIn>
+                 <HoverCard>
+               <div className="p-4">
+                 <div className="flex items-center gap-3 mb-3">
+                   <div className={`p-2 rounded-lg ${page.bgColor}`}>
+                     <page.icon className={`h-5 w-5 ${page.color}`} />
+                   </div>
+                   <h3 className="font-semibold">{page.title}</h3>
+                 </div>
+                 <p className="text-sm text-muted-foreground">
+                   {page.description}
+                 </p>
+               </div>
+             </HoverCard>
+               </div>
+             </FadeIn>
           ))}
         </div>
       </div>

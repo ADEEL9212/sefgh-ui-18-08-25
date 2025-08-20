@@ -48,16 +48,6 @@ interface ProxySettings {
   requiresAuth: boolean;
 }
 
-interface WorkbenchData {
-  id: string;
-  title: string;
-  content: string;
-  mode: 'markdown' | 'code' | 'text';
-  language?: string;
-  lastModified: Date;
-  version?: number;
-}
-
 interface AppState {
   theme: 'light' | 'dark';
   isNavOpen: boolean;
