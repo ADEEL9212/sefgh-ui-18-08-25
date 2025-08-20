@@ -561,6 +561,7 @@ export const SEFGHApp = () => {
             initialView={state.activeView as 'chat' | 'history'}
             onViewChange={(view) => setActiveView(view)}
             onOpenWorkbench={openWorkbench}
+            onToggleGithubSearch={() => updateState({ isSearchVisible: !state.isSearchVisible })}
           />
         );
       case 'language':

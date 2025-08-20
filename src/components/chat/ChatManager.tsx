@@ -31,9 +31,10 @@ interface ChatManagerProps {
   initialView?: 'chat' | 'history';
   onViewChange?: (view: 'chat' | 'history') => void;
   onOpenWorkbench?: () => void;
+  onToggleGithubSearch?: () => void;
 }
 
-export function ChatManager({ className = '', initialView = 'chat', onViewChange, onOpenWorkbench }: ChatManagerProps) {
+export function ChatManager({ className = '', initialView = 'chat', onViewChange, onOpenWorkbench, onToggleGithubSearch }: ChatManagerProps) {
   // Core state
   const [currentMessages, setCurrentMessages] = useState<Message[]>([]);
   const [chatSessions, setChatSessions] = useState<ChatSession[]>([]);
@@ -322,6 +323,7 @@ export function ChatManager({ className = '', initialView = 'chat', onViewChange
                 isLoading={isLoading}
                 inputRef={chatInputRef}
                 onOpenCanvas={onOpenWorkbench}
+                onToggleGithubSearch={onToggleGithubSearch}
               />
             </motion.div>
           ) : (
