@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system - colors, gradients, fonts, etc should be defined here. 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
 
@@ -51,9 +51,9 @@ All colors MUST be HSL.
     --foreground: 30 25% 11%; /* #1C1917 - Very dark warm gray */
 
     /* Surface colors */
-    --surface: 35 6% 91%;     /* #E7E5E4 - Soft warm gray for subtle separation */
-    --surface-elevated: 0 0% 100%; /* #FFFFFF - Clean white for cards and modals */
-    --surface-glass: 60 9% 98% / 0.8;
+    --surface: 210 9% 96%;     /* Slightly darker than background */
+    --surface-elevated: 0 0% 100%; /* Pure white for elevated elements */
+    --surface-glass: 210 9% 98% / 0.8;
 
     /* Card colors */
     --card: 0 0% 100%;        /* #FFFFFF - Clean white for cards */
@@ -66,7 +66,7 @@ All colors MUST be HSL.
     /* Brand colors - Deep Teal */
     --brand: 173 83% 32%;     /* #0D9488 - Rich, sophisticated teal */
     --brand-foreground: 0 0% 100%; /* White text on brand */
-    --brand-muted: 173 83% 32% / 0.1;
+    --brand-muted: 212 95% 44% / 0.1;
 
     /* Primary colors - Deep Teal */
     --primary: 173 83% 32%;   /* #0D9488 - Deep teal */
@@ -77,8 +77,8 @@ All colors MUST be HSL.
     --secondary-foreground: 30 8% 45%; /* #78716C - Secondary text color */
 
     /* Muted colors */
-    --muted: 35 6% 91%;       /* #E7E5E4 - Border/divider color */
-    --muted-foreground: 30 8% 45%; /* #78716C - Secondary text */
+    --muted: 210 9% 94%;       /* Lighter variation */
+    --muted-foreground: 210 12% 16% / 0.7; /* Primary text with opacity */
 
     /* Accent colors - Success Green */
     --accent: 142 71% 45%;    /* #22C55E - Classic clear green */
@@ -93,9 +93,9 @@ All colors MUST be HSL.
     --warning-foreground: 0 0% 100%;
 
     /* Border and input */
-    --border: 35 6% 91%; /* #E7E5E4 - Soft warm gray */
-    --input: 60 9% 98%;       /* #FAFAF9 - Background color for inputs */
-    --ring: 173 83% 32%;      /* #0D9488 - Deep teal for focus rings */
+    --border: 210 12% 16% / 0.2; /* Primary text with low opacity */
+    --input: 210 9% 94%;       /* Muted background */
+    --ring: 212 95% 44%;      /* Primary color for focus rings */
 
     --radius: 0.5rem;
 
@@ -104,10 +104,10 @@ All colors MUST be HSL.
     --sidebar-foreground: 30 25% 11%; /* #1C1917 - Primary text */
     --sidebar-primary: 173 83% 32%;  /* #0D9488 - Deep teal */
     --sidebar-primary-foreground: 0 0% 100%; /* White text */
-    --sidebar-accent: 35 6% 91%;     /* #E7E5E4 - Muted */
-    --sidebar-accent-foreground: 30 8% 45%; /* #78716C - Secondary text */
-    --sidebar-border: 35 6% 91%;
-    --sidebar-ring: 173 83% 32%;
+    --sidebar-accent: 210 9% 94%;     /* Muted */
+    --sidebar-accent-foreground: 210 12% 16%; /* #24292F */
+    --sidebar-border: 210 12% 16% / 0.2;
+    --sidebar-ring: 212 95% 44%;
   }
 
   .dark {
@@ -116,9 +116,9 @@ All colors MUST be HSL.
     --foreground: 60 9% 98%; /* #FAFAF9 - Warm off-white text */
 
     /* Surface colors */
-    --surface: 30 9% 16%;     /* #292524 - Slightly lighter slate */
-    --surface-elevated: 30 9% 25%; /* #44403C - More elevated surfaces */
-    --surface-glass: 30 25% 11% / 0.8;
+    --surface: 220 14% 10%;     /* Slightly lighter than background */
+    --surface-elevated: 220 14% 13%; /* More elevated surfaces */
+    --surface-glass: 220 14% 7% / 0.8;
 
     /* Card colors */
     --card: 30 9% 16%;        /* #292524 - Surface color for cards */
@@ -128,10 +128,10 @@ All colors MUST be HSL.
     --popover: 30 9% 25%;     /* #44403C - Elevated surface */
     --popover-foreground: 60 9% 98%; /* #FAFAF9 - Light text */
 
-    /* Brand colors - Bright Teal */
-    --brand: 172 72% 51%;      /* #2DD4BF - Bright, luminous teal */
-    --brand-foreground: 30 25% 11%; /* Dark background for text on brand */
-    --brand-muted: 172 72% 51% / 0.1;
+    /* Brand colors - Using primary as brand */
+    --brand: 212 100% 68%;      /* #58A6FF */
+    --brand-foreground: 220 14% 7%; /* Dark background for text on brand */
+    --brand-muted: 212 100% 68% / 0.1;
 
     /* Primary colors - Bright Teal */
     --primary: 172 72% 51%;    /* #2DD4BF - Bright teal */
@@ -142,8 +142,8 @@ All colors MUST be HSL.
     --secondary-foreground: 30 5% 66%; /* #A8A29E - Muted gray text */
 
     /* Muted colors */
-    --muted: 30 9% 16%;       /* #292524 - Surface variation */
-    --muted-foreground: 30 5% 66%; /* #A8A29E - Muted gray for less important text */
+    --muted: 220 14% 10%;       /* Lighter variation */
+    --muted-foreground: 210 10% 82% / 0.7; /* Light gray with opacity */
 
     /* Accent colors - Success Green Dark */
     --accent: 142 76% 59%;     /* #4ADE80 - Brighter green for visibility */
@@ -158,19 +158,19 @@ All colors MUST be HSL.
     --warning-foreground: 30 25% 11%; /* Dark text on warning */
 
     /* Border and input */
-    --border: 30 9% 25%;  /* #44403C - Subtle divider for dark background */
-    --input: 30 9% 16%;       /* #292524 - Surface color for inputs */
-    --ring: 172 72% 51%;       /* #2DD4BF - Bright teal for focus rings */
+    --border: 210 10% 82% / 0.1;  /* Light gray with low opacity */
+    --input: 220 14% 10%;       /* Muted background */
+    --ring: 212 100% 68%;       /* Primary color for focus rings */
 
     /* Sidebar colors */
-    --sidebar-background: 30 9% 16%; /* #292524 - Slightly differentiated */
-    --sidebar-foreground: 60 9% 98%; /* #FAFAF9 - Light text */
-    --sidebar-primary: 172 72% 51%;  /* #2DD4BF - Bright teal */
-    --sidebar-primary-foreground: 30 25% 11%; /* Dark background */
-    --sidebar-accent: 30 9% 25%;    /* #44403C - Elevated */
-    --sidebar-accent-foreground: 30 5% 66%; /* #A8A29E - Muted text */
-    --sidebar-border: 30 9% 25%;
-    --sidebar-ring: 172 72% 51%;
+    --sidebar-background: 220 14% 10%; /* Slightly differentiated */
+    --sidebar-foreground: 210 10% 82%; /* #C9D1D9 */
+    --sidebar-primary: 212 100% 68%;  /* #58A6FF */
+    --sidebar-primary-foreground: 220 14% 7%; /* Dark background */
+    --sidebar-accent: 220 14% 13%;    /* Elevated */
+    --sidebar-accent-foreground: 210 10% 82%; /* #C9D1D9 */
+    --sidebar-border: 210 10% 82% / 0.1;
+    --sidebar-ring: 212 100% 68%;
   }
 }
 
