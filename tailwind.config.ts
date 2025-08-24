@@ -21,20 +21,7 @@ export default {
 			sans: ['Figtree', 'sans-serif'],
 		},
 		extend: {
-			fontFamily: {
-				sans: ['Geo', 'sans-serif'],
-			},
 			colors: {
-				// Daylight Slate (Light) and Midnight Slate (Dark) color palette
-				'light-background': '#F6F8FA',
-				'light-primary': '#0969DA',
-				'light-accent': '#E36209',
-				'light-text': '#24292F',
-				'dark-background': '#0D1117',
-				'dark-primary': '#58A6FF',
-				'dark-accent': '#F78166',
-				'dark-text': '#C9D1D9',
-
 				// Design system tokens
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -52,6 +39,10 @@ export default {
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
+				},
+				warning: {
+					DEFAULT: 'hsl(var(--warning))',
+					foreground: 'hsl(var(--warning-foreground))'
 				},
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',

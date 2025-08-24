@@ -46,111 +46,119 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Base colors - Daylight Slate Light Theme: #F6F8FA, #0969DA, #24292F */
-    --background: 210 9% 98%;  /* #F6F8FA */
-    --foreground: 210 12% 16%; /* #24292F */
+    /* Base colors - Analytical Teal & Stone Light Theme */
+    --background: 60 9% 98%;  /* #FAFAF9 - Warm stone off-white */
+    --foreground: 30 25% 11%; /* #1C1917 - Very dark warm gray */
 
     /* Surface colors */
     --surface: 210 9% 96%;     /* Slightly darker than background */
     --surface-elevated: 0 0% 100%; /* Pure white for elevated elements */
-    --surface-glass: 210 9% 98% \/ 0.8;
+    --surface-glass: 210 9% 98% / 0.8;
 
     /* Card colors */
-    --card: 210 9% 96%;        /* Slightly differentiated from background */
-    --card-foreground: 210 12% 16%; /* #24292F */
+    --card: 0 0% 100%;        /* #FFFFFF - Clean white for cards */
+    --card-foreground: 30 25% 11%; /* #1C1917 - Primary text */
 
     /* Popover colors */
-    --popover: 0 0% 100%;     /* White for better contrast */
-    --popover-foreground: 210 12% 16%; /* #24292F */
+    --popover: 0 0% 100%;     /* #FFFFFF - Clean white */
+    --popover-foreground: 30 25% 11%; /* #1C1917 - Primary text */
 
-    /* Brand colors - Using primary as brand */
-    --brand: 212 95% 44%;     /* #0969DA */
+    /* Brand colors - Deep Teal */
+    --brand: 173 83% 32%;     /* #0D9488 - Rich, sophisticated teal */
     --brand-foreground: 0 0% 100%; /* White text on brand */
-    --brand-muted: 212 95% 44% \/ 0.1;
+    --brand-muted: 212 95% 44% / 0.1;
 
-    /* Primary colors - Strong Blue */
-    --primary: 212 95% 44%;   /* #0969DA */
+    /* Primary colors - Deep Teal */
+    --primary: 173 83% 32%;   /* #0D9488 - Deep teal */
     --primary-foreground: 0 0% 100%; /* White text on primary */
 
     /* Secondary colors */
-    --secondary: 210 9% 94%;   /* Muted version of background */
-    --secondary-foreground: 210 12% 16%; /* #24292F */
+    --secondary: 35 6% 91%;   /* #E7E5E4 - Border color for secondary elements */
+    --secondary-foreground: 30 8% 45%; /* #78716C - Secondary text color */
 
     /* Muted colors */
     --muted: 210 9% 94%;       /* Lighter variation */
-    --muted-foreground: 210 12% 16% \/ 0.7; /* Primary text with opacity */
+    --muted-foreground: 210 12% 16% / 0.7; /* Primary text with opacity */
 
-    /* Accent colors - Burnt Orange */
-    --accent: 25 89% 47%;    /* #E36209 */
+    /* Accent colors - Success Green */
+    --accent: 142 71% 45%;    /* #22C55E - Classic clear green */
     --accent-foreground: 0 0% 100%; /* White text on accent */
 
-    /* Destructive colors */
-    --destructive: 0 84% 60%;
+    /* Destructive colors - Error Red */
+    --destructive: 0 84% 60%; /* #EF4444 - Clean standard red */
     --destructive-foreground: 0 0% 100%;
 
+    /* Warning colors */
+    --warning: 38 92% 50%; /* #F59E0B - Vibrant amber */
+    --warning-foreground: 0 0% 100%;
+
     /* Border and input */
-    --border: 210 12% 16% \/ 0.2; /* Primary text with low opacity */
+    --border: 210 12% 16% / 0.2; /* Primary text with low opacity */
     --input: 210 9% 94%;       /* Muted background */
     --ring: 212 95% 44%;      /* Primary color for focus rings */
 
     --radius: 0.5rem;
 
     /* Sidebar colors */
-    --sidebar-background: 210 9% 96%; /* Slightly differentiated */
-    --sidebar-foreground: 210 12% 16%; /* #24292F */
-    --sidebar-primary: 212 95% 44%;  /* #0969DA */
+    --sidebar-background: 60 9% 98%; /* #FAFAF9 - Background */
+    --sidebar-foreground: 30 25% 11%; /* #1C1917 - Primary text */
+    --sidebar-primary: 173 83% 32%;  /* #0D9488 - Deep teal */
     --sidebar-primary-foreground: 0 0% 100%; /* White text */
     --sidebar-accent: 210 9% 94%;     /* Muted */
     --sidebar-accent-foreground: 210 12% 16%; /* #24292F */
-    --sidebar-border: 210 12% 16% \/ 0.2;
+    --sidebar-border: 210 12% 16% / 0.2;
     --sidebar-ring: 212 95% 44%;
   }
 
   .dark {
-    /* Base colors - Midnight Slate Dark Theme: #0D1117, #58A6FF, #C9D1D9 */
-    --background: 220 14% 7%;  /* #0D1117 */
-    --foreground: 210 10% 82%; /* #C9D1D9 */
+    /* Base colors - Analytical Teal & Stone Dark Theme */
+    --background: 30 25% 11%;  /* #1C1917 - Deep warm stone gray */
+    --foreground: 60 9% 98%; /* #FAFAF9 - Warm off-white text */
 
     /* Surface colors */
     --surface: 220 14% 10%;     /* Slightly lighter than background */
     --surface-elevated: 220 14% 13%; /* More elevated surfaces */
-    --surface-glass: 220 14% 7% \/ 0.8;
+    --surface-glass: 220 14% 7% / 0.8;
 
     /* Card colors */
-    --card: 220 14% 10%;        /* Slightly differentiated from background */
-    --card-foreground: 210 10% 82%; /* #C9D1D9 */
+    --card: 30 9% 16%;        /* #292524 - Surface color for cards */
+    --card-foreground: 60 9% 98%; /* #FAFAF9 - Light text */
 
     /* Popover colors */
-    --popover: 220 14% 13%;     /* Elevated surface */
-    --popover-foreground: 210 10% 82%; /* #C9D1D9 */
+    --popover: 30 9% 25%;     /* #44403C - Elevated surface */
+    --popover-foreground: 60 9% 98%; /* #FAFAF9 - Light text */
 
     /* Brand colors - Using primary as brand */
     --brand: 212 100% 68%;      /* #58A6FF */
     --brand-foreground: 220 14% 7%; /* Dark background for text on brand */
-    --brand-muted: 212 100% 68% \/ 0.1;
+    --brand-muted: 212 100% 68% / 0.1;
 
-    /* Primary colors - Bright Blue */
-    --primary: 212 100% 68%;    /* #58A6FF */
-    --primary-foreground: 220 14% 7%; /* Dark background */
+    /* Primary colors - Bright Teal */
+    --primary: 172 72% 51%;    /* #2DD4BF - Bright teal */
+    --primary-foreground: 30 25% 11%; /* Dark background */
 
     /* Secondary colors */
-    --secondary: 220 14% 10%;   /* Slightly lighter than background */
-    --secondary-foreground: 210 10% 82%; /* #C9D1D9 */
+    --secondary: 30 9% 16%;   /* #292524 - Surface color */
+    --secondary-foreground: 30 5% 66%; /* #A8A29E - Muted gray text */
 
     /* Muted colors */
     --muted: 220 14% 10%;       /* Lighter variation */
-    --muted-foreground: 210 10% 82% \/ 0.7; /* Light gray with opacity */
+    --muted-foreground: 210 10% 82% / 0.7; /* Light gray with opacity */
 
-    /* Accent colors - Orange */
-    --accent: 15 91% 69%;     /* #F78166 */
-    --accent-foreground: 220 14% 7%; /* Dark background */
+    /* Accent colors - Success Green Dark */
+    --accent: 142 76% 59%;     /* #4ADE80 - Brighter green for visibility */
+    --accent-foreground: 30 25% 11%; /* Dark background */
 
-    /* Destructive colors */
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    /* Destructive colors - Error Red Dark */
+    --destructive: 0 85% 71%; /* #F87171 - Lighter red, clear but not harsh */
+    --destructive-foreground: 30 25% 11%; /* Dark text on destructive */
+
+    /* Warning colors */
+    --warning: 45 93% 58%; /* #FBBF24 - Brighter amber */
+    --warning-foreground: 30 25% 11%; /* Dark text on warning */
 
     /* Border and input */
-    --border: 210 10% 82% \/ 0.1;  /* Light gray with low opacity */
+    --border: 210 10% 82% / 0.1;  /* Light gray with low opacity */
     --input: 220 14% 10%;       /* Muted background */
     --ring: 212 100% 68%;       /* Primary color for focus rings */
 
@@ -161,7 +169,7 @@ All colors MUST be HSL.
     --sidebar-primary-foreground: 220 14% 7%; /* Dark background */
     --sidebar-accent: 220 14% 13%;    /* Elevated */
     --sidebar-accent-foreground: 210 10% 82%; /* #C9D1D9 */
-    --sidebar-border: 210 10% 82% \/ 0.1;
+    --sidebar-border: 210 10% 82% / 0.1;
     --sidebar-ring: 212 100% 68%;
   }
 }
@@ -208,19 +216,6 @@ All colors MUST be HSL.
 }
 
 @layer components {
-  /* Font variants */
-  .geo-regular {
-    font-family: "Geo", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-
-  .geo-regular-italic {
-    font-family: "Geo", sans-serif;
-    font-weight: 400;
-    font-style: italic;
-  }
-
   /* Glass effect utilities */
   .glass-effect {
     @apply backdrop-blur-lg bg-surface-glass border border-border/50;
