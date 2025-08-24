@@ -2,7 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Definition of the design syste    /* Sidebar colors */
+    --sidebar-background: 210 9% 96%; /* Slightly differentiated */
+    --sidebar-foreground: 210 12% 16%; /* #24292F */
+    --sidebar-primary: 212 95% 44%;  /* #0969DA */
+    --sidebar-primary-foreground: 0 0% 100%; /* White text */
+    --sidebar-accent: 210 9% 94%;     /* Muted */
+    --sidebar-accent-foreground: 210 12% 16%; /* #24292F */
+    --sidebar-border: 210 12% 16% / 0.2;
+    --sidebar-ring: 212 95% 44%;lors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
 
@@ -46,135 +54,123 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Light Mode - Neutrals (Graphite) */
-    --background: 220 14% 98%;  /* #F9FAFB */
-    --foreground: 222 47% 11%;  /* #111827 - Primary Text */
+    /* Base colors - Daylight Slate Light Theme: #F6F8FA, #0969DA, #24292F */
+    --background: 210 9% 98%;  /* #F6F8FA */
+    --foreground: 210 12% 16%; /* #24292F */
 
     /* Surface colors */
-    --surface: 0 0% 100%;       /* #FFFFFF - Surface */
-    --surface-elevated: 0 0% 100%; /* #FFFFFF - Elevated elements */
-    --surface-glass: 220 14% 98% / 0.8; /* #F9FAFB with opacity */
+    --surface: 210 9% 96%;     /* Slightly darker than background */
+    --surface-elevated: 0 0% 100%; /* Pure white for elevated elements */
+    --surface-glass: 210 9% 98% / 0.8;
 
     /* Card colors */
-    --card: 0 0% 100%;          /* #FFFFFF - Cards */
-    --card-foreground: 222 47% 11%; /* #111827 - Primary Text */
+    --card: 210 9% 96%;        /* Slightly differentiated from background */
+    --card-foreground: 210 12% 16%; /* #24292F */
 
     /* Popover colors */
-    --popover: 0 0% 100%;       /* #FFFFFF - For better contrast */
-    --popover-foreground: 222 47% 11%; /* #111827 - Primary Text */
+    --popover: 0 0% 100%;     /* White for better contrast */
+    --popover-foreground: 210 12% 16%; /* #24292F */
 
-    /* Brand/Primary colors */
-    --brand: 247 88% 50%;       /* #4338CA - Brand Blue */
-    --brand-foreground: 0 0% 100%; /* #FFFFFF - White text on brand */
-    --brand-muted: 247 88% 50% / 0.1; /* Brand with opacity */
+    /* Brand colors - Using primary as brand */
+    --brand: 212 95% 44%;     /* #0969DA */
+    --brand-foreground: 0 0% 100%; /* White text on brand */
+    --brand-muted: 212 95% 44% / 0.1;
 
-    /* Primary colors - Brand Blue */
-    --primary: 247 88% 50%;     /* #4338CA - Brand Blue */
-    --primary-foreground: 0 0% 100%; /* #FFFFFF - White text on primary */
+    /* Primary colors - Strong Blue */
+    --primary: 212 95% 44%;   /* #0969DA */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
 
     /* Secondary colors */
-    --secondary: 220 13% 91%;   /* #E5E7EB - Border/Divider color as secondary */
-    --secondary-foreground: 217 19% 27%; /* #475569 - For text on secondary */
+    --secondary: 210 9% 94%;   /* Muted version of background */
+    --secondary-foreground: 210 12% 16%; /* #24292F */
 
     /* Muted colors */
-    --muted: 220 13% 91%;       /* #E5E7EB - Border/Divider color */
-    --muted-foreground: 220 9% 46%; /* #6B7280 - Secondary Text */
+    --muted: 210 9% 94%;       /* Lighter variation */
+    --muted-foreground: 210 12% 16% / 0.7; /* Primary text with opacity */
 
-    /* Accent colors - Using brand blue hover */
-    --accent: 248 90% 42%;      /* #3730A3 - Brand Blue (Hover) */
+    /* Accent colors - Burnt Orange */
+    --accent: 25 89% 47%;    /* #E36209 */
     --accent-foreground: 0 0% 100%; /* White text on accent */
 
-    /* Semantic colors */
-    --destructive: 0 84% 60%;    /* #EF4444 - Error */
+    /* Destructive colors */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     /* Border and input */
-    --border: 220 13% 91%;       /* #E5E7EB - Border/Divider */
-    --input: 220 13% 91%;        /* #E5E7EB - For input backgrounds */
-    --ring: 247 88% 50%;         /* #4338CA - Primary color for focus rings */
+    --border: 210 12% 16% / 0.2; /* Primary text with low opacity */
+    --input: 210 9% 94%;       /* Muted background */
+    --ring: 212 95% 44%;      /* Primary color for focus rings */
 
-    /* Success and Warning */
-    --success: 158 64% 40%;      /* #10B981 - Success */
-    --success-foreground: 0 0% 100%;
-    --warning: 35 92% 51%;       /* #F59E0B - Warning */
-    --warning-foreground: 0 0% 100%;
-    
     --radius: 0.5rem;
 
     /* Sidebar colors */
-    --sidebar-background: 220 14% 98%; /* #F9FAFB - Same as main background */
-    --sidebar-foreground: 222 47% 11%; /* #111827 - Primary Text */
-    --sidebar-primary: 247 88% 50%;    /* #4338CA - Brand Blue */
+    --sidebar-background: 210 9% 96%; /* Slightly differentiated */
+    --sidebar-foreground: 210 12% 16%; /* #24292F */
+    --sidebar-primary: 212 95% 44%;  /* #0969DA */
     --sidebar-primary-foreground: 0 0% 100%; /* White text */
-    --sidebar-accent: 248 90% 42%;     /* #3730A3 - Brand Blue (Hover) */
-    --sidebar-accent-foreground: 0 0% 100%; /* White text */
-    --sidebar-border: 220 13% 91%;     /* #E5E7EB - Border/Divider */
-    --sidebar-ring: 247 88% 50%;       /* #4338CA - Brand Blue */
+    --sidebar-accent: 210 9% 94%;     /* Muted */
+    --sidebar-accent-foreground: 210 12% 16%; /* #24292F */
+    --sidebar-border: 210 12% 16% / 0.2;
+    --sidebar-ring: 212 95% 44%;
   }
 
   .dark {
-    /* Dark Mode - Neutrals (Midnight) */
-    --background: 222 47% 11%;  /* #111827 - Background */
-    --foreground: 210 20% 98%;  /* #F3F4F6 - Primary Text */
+    /* Base colors - Midnight Slate Dark Theme: #0D1117, #58A6FF, #C9D1D9 */
+    --background: 220 14% 7%;  /* #0D1117 */
+    --foreground: 210 10% 82%; /* #C9D1D9 */
 
     /* Surface colors */
-    --surface: 215 28% 17%;     /* #1F2937 - Surface */
-    --surface-elevated: 215 28% 17%; /* #1F2937 - Surface */
-    --surface-glass: 222 47% 11% / 0.8; /* Background with opacity */
+    --surface: 220 14% 10%;     /* Slightly lighter than background */
+    --surface-elevated: 220 14% 13%; /* More elevated surfaces */
+    --surface-glass: 220 14% 7% / 0.8;
 
     /* Card colors */
-    --card: 215 28% 17%;        /* #1F2937 - Surface for cards */
-    --card-foreground: 210 20% 98%; /* #F3F4F6 - Primary Text */
+    --card: 220 14% 10%;        /* Slightly differentiated from background */
+    --card-foreground: 210 10% 82%; /* #C9D1D9 */
 
     /* Popover colors */
-    --popover: 215 28% 17%;     /* #1F2937 - Surface */
-    --popover-foreground: 210 20% 98%; /* #F3F4F6 - Primary Text */
+    --popover: 220 14% 13%;     /* Elevated surface */
+    --popover-foreground: 210 10% 82%; /* #C9D1D9 */
 
     /* Brand colors - Using primary as brand */
-    --brand: 240 75% 74%;       /* #818CF8 - Brand Blue */
-    --brand-foreground: 222 47% 11%; /* #111827 - Background text on brand */
-    --brand-muted: 240 75% 74% / 0.1; /* Brand with opacity */
+    --brand: 212 100% 68%;      /* #58A6FF */
+    --brand-foreground: 220 14% 7%; /* Dark background for text on brand */
+    --brand-muted: 212 100% 68% / 0.1;
 
-    /* Primary colors - Brand Blue */
-    --primary: 240 75% 74%;     /* #818CF8 - Brand Blue */
-    --primary-foreground: 222 47% 11%; /* #111827 - Dark background */
+    /* Primary colors - Bright Blue */
+    --primary: 212 100% 68%;    /* #58A6FF */
+    --primary-foreground: 220 14% 7%; /* Dark background */
 
     /* Secondary colors */
-    --secondary: 215 28% 27%;   /* #374151 - Border/Divider */
-    --secondary-foreground: 217 22% 65%; /* #9CA3AF - Secondary Text */
+    --secondary: 220 14% 10%;   /* Slightly lighter than background */
+    --secondary-foreground: 210 10% 82%; /* #C9D1D9 */
 
     /* Muted colors */
-    --muted: 215 28% 27%;       /* #374151 - Border/Divider */
-    --muted-foreground: 217 22% 65%; /* #9CA3AF - Secondary Text */
+    --muted: 220 14% 10%;       /* Lighter variation */
+    --muted-foreground: 210 10% 82% / 0.7; /* Light gray with opacity */
 
-    /* Accent colors - Brand Blue Hover */
-    --accent: 228 96% 82%;      /* #A5B4FC - Brand Blue Hover */
-    --accent-foreground: 222 47% 11%; /* #111827 - Dark background */
+    /* Accent colors - Orange */
+    --accent: 15 91% 69%;     /* #F78166 */
+    --accent-foreground: 220 14% 7%; /* Dark background */
 
-    /* Semantic colors */
-    --destructive: 0 91% 71%;   /* #F87171 - Error */
+    /* Destructive colors */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     /* Border and input */
-    --border: 215 28% 27%;       /* #374151 - Border/Divider */
-    --input: 215 28% 17%;        /* #1F2937 - Surface */
-    --ring: 240 75% 74%;         /* #818CF8 - Brand Blue */
-
-    /* Success and Warning */
-    --success: 160 84% 52%;      /* #34D399 - Success */
-    --success-foreground: 222 47% 11%;
-    --warning: 44 96% 56%;       /* #FBBF24 - Warning */
-    --warning-foreground: 222 47% 11%;
+    --border: 210 10% 82% / 0.1;  /* Light gray with low opacity */
+    --input: 220 14% 10%;       /* Muted background */
+    --ring: 212 100% 68%;       /* Primary color for focus rings */
 
     /* Sidebar colors */
-    --sidebar-background: 215 28% 17%; /* #1F2937 - Surface */
-    --sidebar-foreground: 210 20% 98%; /* #F3F4F6 - Primary Text */
-    --sidebar-primary: 240 75% 74%;    /* #818CF8 - Brand Blue */
-    --sidebar-primary-foreground: 222 47% 11%; /* #111827 - Background */
-    --sidebar-accent: 228 96% 82%;     /* #A5B4FC - Brand Blue Hover */
-    --sidebar-accent-foreground: 222 47% 11%; /* #111827 - Background */
-    --sidebar-border: 215 28% 27%;     /* #374151 - Border/Divider */
-    --sidebar-ring: 240 75% 74%;       /* #818CF8 - Brand Blue */
+    --sidebar-background: 220 14% 10%; /* Slightly differentiated */
+    --sidebar-foreground: 210 10% 82%; /* #C9D1D9 */
+    --sidebar-primary: 212 100% 68%;  /* #58A6FF */
+    --sidebar-primary-foreground: 220 14% 7%; /* Dark background */
+    --sidebar-accent: 220 14% 13%;    /* Elevated */
+    --sidebar-accent-foreground: 210 10% 82%; /* #C9D1D9 */
+    --sidebar-border: 210 10% 82% / 0.1;
+    --sidebar-ring: 212 100% 68%;
   }
 }
 
