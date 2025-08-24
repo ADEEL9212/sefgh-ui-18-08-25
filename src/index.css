@@ -2,15 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design syste    /* Sidebar colors */
-    --sidebar-background: 210 9% 96%; /* Slightly differentiated */
-    --sidebar-foreground: 210 12% 16%; /* #24292F */
-    --sidebar-primary: 212 95% 44%;  /* #0969DA */
-    --sidebar-primary-foreground: 0 0% 100%; /* White text */
-    --sidebar-accent: 210 9% 94%;     /* Muted */
-    --sidebar-accent-foreground: 210 12% 16%; /* #24292F */
-    --sidebar-border: 210 12% 16% / 0.2;
-    --sidebar-ring: 212 95% 44%;lors, gradients, fonts, etc should be defined here. 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
 
@@ -61,7 +53,7 @@ All colors MUST be HSL.
     /* Surface colors */
     --surface: 210 9% 96%;     /* Slightly darker than background */
     --surface-elevated: 0 0% 100%; /* Pure white for elevated elements */
-    --surface-glass: 210 9% 98% / 0.8;
+    --surface-glass: 210 9% 98% \/ 0.8;
 
     /* Card colors */
     --card: 210 9% 96%;        /* Slightly differentiated from background */
@@ -74,7 +66,7 @@ All colors MUST be HSL.
     /* Brand colors - Using primary as brand */
     --brand: 212 95% 44%;     /* #0969DA */
     --brand-foreground: 0 0% 100%; /* White text on brand */
-    --brand-muted: 212 95% 44% / 0.1;
+    --brand-muted: 212 95% 44% \/ 0.1;
 
     /* Primary colors - Strong Blue */
     --primary: 212 95% 44%;   /* #0969DA */
@@ -86,7 +78,7 @@ All colors MUST be HSL.
 
     /* Muted colors */
     --muted: 210 9% 94%;       /* Lighter variation */
-    --muted-foreground: 210 12% 16% / 0.7; /* Primary text with opacity */
+    --muted-foreground: 210 12% 16% \/ 0.7; /* Primary text with opacity */
 
     /* Accent colors - Burnt Orange */
     --accent: 25 89% 47%;    /* #E36209 */
@@ -97,7 +89,7 @@ All colors MUST be HSL.
     --destructive-foreground: 0 0% 100%;
 
     /* Border and input */
-    --border: 210 12% 16% / 0.2; /* Primary text with low opacity */
+    --border: 210 12% 16% \/ 0.2; /* Primary text with low opacity */
     --input: 210 9% 94%;       /* Muted background */
     --ring: 212 95% 44%;      /* Primary color for focus rings */
 
@@ -110,7 +102,7 @@ All colors MUST be HSL.
     --sidebar-primary-foreground: 0 0% 100%; /* White text */
     --sidebar-accent: 210 9% 94%;     /* Muted */
     --sidebar-accent-foreground: 210 12% 16%; /* #24292F */
-    --sidebar-border: 210 12% 16% / 0.2;
+    --sidebar-border: 210 12% 16% \/ 0.2;
     --sidebar-ring: 212 95% 44%;
   }
 
@@ -122,7 +114,7 @@ All colors MUST be HSL.
     /* Surface colors */
     --surface: 220 14% 10%;     /* Slightly lighter than background */
     --surface-elevated: 220 14% 13%; /* More elevated surfaces */
-    --surface-glass: 220 14% 7% / 0.8;
+    --surface-glass: 220 14% 7% \/ 0.8;
 
     /* Card colors */
     --card: 220 14% 10%;        /* Slightly differentiated from background */
@@ -135,7 +127,7 @@ All colors MUST be HSL.
     /* Brand colors - Using primary as brand */
     --brand: 212 100% 68%;      /* #58A6FF */
     --brand-foreground: 220 14% 7%; /* Dark background for text on brand */
-    --brand-muted: 212 100% 68% / 0.1;
+    --brand-muted: 212 100% 68% \/ 0.1;
 
     /* Primary colors - Bright Blue */
     --primary: 212 100% 68%;    /* #58A6FF */
@@ -147,7 +139,7 @@ All colors MUST be HSL.
 
     /* Muted colors */
     --muted: 220 14% 10%;       /* Lighter variation */
-    --muted-foreground: 210 10% 82% / 0.7; /* Light gray with opacity */
+    --muted-foreground: 210 10% 82% \/ 0.7; /* Light gray with opacity */
 
     /* Accent colors - Orange */
     --accent: 15 91% 69%;     /* #F78166 */
@@ -158,7 +150,7 @@ All colors MUST be HSL.
     --destructive-foreground: 0 0% 100%;
 
     /* Border and input */
-    --border: 210 10% 82% / 0.1;  /* Light gray with low opacity */
+    --border: 210 10% 82% \/ 0.1;  /* Light gray with low opacity */
     --input: 220 14% 10%;       /* Muted background */
     --ring: 212 100% 68%;       /* Primary color for focus rings */
 
@@ -169,7 +161,7 @@ All colors MUST be HSL.
     --sidebar-primary-foreground: 220 14% 7%; /* Dark background */
     --sidebar-accent: 220 14% 13%;    /* Elevated */
     --sidebar-accent-foreground: 210 10% 82%; /* #C9D1D9 */
-    --sidebar-border: 210 10% 82% / 0.1;
+    --sidebar-border: 210 10% 82% \/ 0.1;
     --sidebar-ring: 212 100% 68%;
   }
 }
