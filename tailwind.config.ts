@@ -17,6 +17,9 @@ export default {
 				'2xl': '1400px'
 			}
 		},
+		fontFamily: {
+			sans: ['Figtree', 'sans-serif'],
+		},
 		extend: {
 			fontFamily: {
 				sans: ['Geo', 'sans-serif'],

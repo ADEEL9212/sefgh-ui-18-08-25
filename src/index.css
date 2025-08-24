@@ -7,6 +7,44 @@ All colors MUST be HSL.
 */
 
 @layer base {
+  html, body {
+    font-family: "Figtree", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  * {
+    font-family: inherit;
+  }
+  
+  /* Utility classes for different font weights */
+  .figtree-light {
+    font-weight: 300;
+  }
+  
+  .figtree-regular {
+    font-weight: 400;
+  }
+  
+  .figtree-medium {
+    font-weight: 500;
+  }
+  
+  .figtree-semibold {
+    font-weight: 600;
+  }
+  
+  .figtree-bold {
+    font-weight: 700;
+  }
+  
+  .figtree-black {
+    font-weight: 900;
+  }
+}
+
+@layer base {
   :root {
     /* Base colors - Daylight Slate Light Theme: #F6F8FA, #0969DA, #24292F */
     --background: 210 9% 98%;  /* #F6F8FA */
