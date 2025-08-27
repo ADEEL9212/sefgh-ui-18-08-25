@@ -5,7 +5,7 @@ import { ExpandablePromptInput } from '@/components/input/ExpandablePromptInput'
 import { Card, CardContent } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Send, Copy, RotateCcw, Edit3, Trash2, User, Bot, Loader2, Plus, Paperclip, HardDrive, Code, Mic, Settings, Github, ImageIcon, Lightbulb, Globe, PaintBucket, ChevronDown, Filter, X, Search, Download, Share2, FileText, FileDown, File } from 'lucide-react';
+import { Send, Copy, RotateCcw, Edit3, Trash2, User, Bot, Loader2, Plus, Paperclip, Code, Mic, Github, PaintBucket, X, Search, Download, Share2, FileText, FileDown, File } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { ChatService } from '@/services/chatService';
 import { ThinkingAnimation } from '@/components/common/ThinkingAnimation';
@@ -493,6 +493,15 @@ const ChatPanelContent = ({
               }}>
                     <Github className="h-5 w-5 text-gray-300" />
                     <span className="text-sm font-medium text-gray-200">GitHub search</span>
+                  </div>
+                  
+                  {/* Canvas */}
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
+                onOpenCanvas?.();
+                setShowToolsMenu(false);
+              }}>
+                    <PaintBucket className="h-5 w-5 text-gray-300" />
+                    <span className="text-sm font-medium text-gray-200">Canvas</span>
                   </div>
                 </div>
               </div>
