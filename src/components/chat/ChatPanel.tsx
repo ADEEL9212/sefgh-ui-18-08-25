@@ -5,7 +5,7 @@ import { ExpandablePromptInput } from '@/components/input/ExpandablePromptInput'
 import { Card, CardContent } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Send, Copy, RotateCcw, Edit3, Trash2, User, Bot, Loader2, Plus, Paperclip, Code, Mic, Github, PaintBucket, X, Search, Download, Share2, FileText, FileDown, File } from 'lucide-react';
+import { Send, Copy, RotateCcw, Edit3, Trash2, User, Bot, Loader2, Plus, Paperclip, Code, Mic, Github, PaintBucket, X, Search, Download, Share2, FileText, FileDown, File, Lightbulb } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { ChatService } from '@/services/chatService';
 import { ThinkingAnimation } from '@/components/common/ThinkingAnimation';
