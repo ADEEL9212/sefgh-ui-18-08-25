@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from '@/lib/utils';
+import { useFullscreen } from '@/contexts/FullscreenContext';
+import { FullscreenToggle } from '@/components/common/FullscreenToggle';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -54,8 +56,13 @@ export const WorkbenchPanel: React.FC<WorkbenchPanelProps> = ({
   const [isExecuting, setIsExecuting] = useState(false);
   const [executionResult, setExecutionResult] = useState<string | null>(null);
   const { toast } = useToast();
+  const { isFullscreen, fullscreenComponent } = useFullscreen();
   const editorRef = useRef<HTMLTextAreaElement>(null);
   const titleInputRef = useRef<HTMLInputElement>(null);
+
+  // Component identifier for fullscreen
+  const componentId = 'workbench';
+  const isComponentFullscreen = isFullscreen && fullscreenComponent === componentId;
   const contentAreaRef = useRef<HTMLDivElement>(null);
 
   const codeLanguages = [
@@ -275,11 +282,16 @@ export const WorkbenchPanel: React.FC<WorkbenchPanelProps> = ({
   const canExecuteCode = workbench?.mode === 'code' && 
     ['javascript', 'typescript'].includes(workbench.language || '');
 
-  if (!isOpen || !workbench) return null;
+  if (!isOpen && !isComponentFullscreen) return null;
+  if (!workbench) return null;
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex flex-col bg-background/90 backdrop-blur-sm"
+      className={`fixed inset-0 z-50 flex flex-col backdrop-blur-sm ${
+        isComponentFullscreen 
+          ? 'bg-background' 
+          : 'bg-background/90'
+      }`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -441,6 +453,17 @@ export const WorkbenchPanel: React.FC<WorkbenchPanelProps> = ({
               </Button>
             </TooltipTrigger>
             <TooltipContent>Save document (Ctrl+S)</TooltipContent>
+          </Tooltip>
+          
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <FullscreenToggle 
+                componentId={componentId}
+                size="sm"
+                variant="ghost"
+              />
+            </TooltipTrigger>
+            <TooltipContent>Toggle fullscreen</TooltipContent>
           </Tooltip>
           
           <Button

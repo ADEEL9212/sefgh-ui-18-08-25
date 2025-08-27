@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { usePullToRefresh } from '@/hooks/use-pull-to-refresh';
+import { useFullscreen } from '@/contexts/FullscreenContext';
+import { FullscreenToggle } from '@/components/common/FullscreenToggle';
 import { EnhancedSearchInput } from './EnhancedSearchInput';
 import { EnhancedRepositoryCard } from './EnhancedRepositoryCard';
 import { SimilarityModal } from './SimilarityModal';
@@ -56,6 +58,11 @@ export const SearchPanel = ({ isVisible, onClose, inputRef, autoSearchQuery, onQ
   const [showSimilarityModal, setShowSimilarityModal] = useState(false);
   const [activeTab, setActiveTab] = useState('results');
   const { toast } = useToast();
+  const { isFullscreen, fullscreenComponent } = useFullscreen();
+  
+  // Component identifier for fullscreen
+  const componentId = 'github-search';
+  const isComponentFullscreen = isFullscreen && fullscreenComponent === componentId;
 
   const handleRefresh = async () => {
     if (searchState.query.trim()) {
@@ -211,7 +218,7 @@ export const SearchPanel = ({ isVisible, onClose, inputRef, autoSearchQuery, onQ
     }
   }, [autoSearchQuery, isVisible]);
 
-  if (!isVisible) return null;
+  if (!isVisible && !isComponentFullscreen) return null;
 
   const languageStats = searchState.repositories.length > 0 
     ? calculateLanguageStats(searchState.repositories) 
@@ -220,14 +227,13 @@ export const SearchPanel = ({ isVisible, onClose, inputRef, autoSearchQuery, onQ
   return (
     <>
       <div className={`
-        fixed lg:static inset-0 lg:inset-auto
-        w-full sm:w-96 lg:w-[600px] xl:w-[800px]
-        bg-surface lg:bg-sidebar
-        border-l border-border
-        z-40 lg:z-auto
+        ${isComponentFullscreen 
+          ? 'fixed inset-0 w-full z-50 bg-background' 
+          : 'fixed lg:static inset-0 lg:inset-auto w-full sm:w-96 lg:w-[600px] xl:w-[800px] bg-surface lg:bg-sidebar border-l border-border z-40 lg:z-auto'
+        }
         animate-slide-in-right
         flex flex-col
-        transition-transform duration-300 ease-in-out
+        transition-all duration-300 ease-in-out
       `}>
         {/* Header */}
         <div className="p-4 border-b bg-background/95 backdrop-blur-sm lg:bg-transparent">
@@ -245,11 +251,15 @@ export const SearchPanel = ({ isVisible, onClose, inputRef, autoSearchQuery, onQ
                   Export
                 </Button>
               )}
+              <FullscreenToggle 
+                componentId={componentId}
+                className="hidden sm:flex"
+              />
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={onClose}
-                className="lg:hidden min-h-[44px] min-w-[44px]"
+                className={isComponentFullscreen ? "min-h-[44px] min-w-[44px]" : "lg:hidden min-h-[44px] min-w-[44px]"}
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -348,7 +358,11 @@ export const SearchPanel = ({ isVisible, onClose, inputRef, autoSearchQuery, onQ
                 </TabsList>
 
                 <TabsContent value="results" className="space-y-4 mt-4">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div className={`grid gap-4 ${
+                    isComponentFullscreen 
+                      ? 'grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4' 
+                      : 'grid-cols-1 lg:grid-cols-2'
+                  }`}>
                     {searchState.repositories.map((repo) => (
                       <EnhancedRepositoryCard
                         key={repo.id}
