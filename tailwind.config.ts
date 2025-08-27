@@ -155,6 +155,31 @@ export default {
 					'100%': {
 						height: 'auto'
 					}
+				},
+				'mobile-bounce': {
+					'0%, 20%, 50%, 80%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'40%': {
+						transform: 'translateY(-8px)'
+					},
+					'60%': {
+						transform: 'translateY(-4px)'
+					}
+				},
+				'pull-to-refresh': {
+					'0%': {
+						transform: 'translateY(-20px) scale(0.8)',
+						opacity: '0'
+					},
+					'50%': {
+						transform: 'translateY(-10px) scale(0.9)',
+						opacity: '0.5'
+					},
+					'100%': {
+						transform: 'translateY(0) scale(1)',
+						opacity: '1'
+					}
 				}
 			},
 			animation: {
@@ -165,7 +190,9 @@ export default {
 				'rainbow-shine': 'rainbow-shine 3s ease-in-out infinite',
 				'slide-in-left': 'slide-in-left 0.3s ease-out',
 				'slide-in-right': 'slide-in-right 0.3s ease-out',
-				'height-expand': 'height-expand 0.2s ease-out'
+				'height-expand': 'height-expand 0.2s ease-out',
+				'mobile-bounce': 'mobile-bounce 0.6s ease-in-out',
+				'pull-to-refresh': 'pull-to-refresh 0.3s ease-out'
 			},
 			backdropBlur: {
 				xs: '2px'

@@ -617,7 +617,7 @@ export const MainApp = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-background text-foreground">
+    <div className="h-screen flex flex-col bg-background text-foreground mobile-viewport">
       <AppHeader
         theme={state.theme}
         selectedVersion={state.selectedVersion}
@@ -634,7 +634,15 @@ export const MainApp = () => {
         }}
       />
 
-      <main className="flex-1 flex pt-14 overflow-hidden">
+      <main className="flex-1 flex pt-14 overflow-hidden relative">
+        {/* Mobile overlay for navigation/search panels */}
+        {(state.isNavOpen || state.isSearchVisible) && (
+          <div 
+            className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+            onClick={() => updateState({ isNavOpen: false, isSearchVisible: false })}
+          />
+        )}
+
         <NavigationPanel
           isOpen={state.isNavOpen}
           activeView={state.activeView}
@@ -645,7 +653,7 @@ export const MainApp = () => {
         />
 
         <div className="flex-1 flex overflow-hidden">
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 overflow-hidden min-w-0">
             {renderActivePanel()}
           </div>
 

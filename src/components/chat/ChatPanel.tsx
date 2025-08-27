@@ -518,24 +518,44 @@ const ChatPanelContent = ({
             </Tooltip>
             
             {/* Tools toggle button */}
-            <Button type="button" variant="ghost" size="sm" onClick={() => setShowToolsMenu(!showToolsMenu)} className={`flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 rounded-lg p-2 transition-colors ${showToolsMenu ? 'bg-slate-700 text-white' : ''}`}>
+            <Button 
+              type="button" 
+              variant="ghost" 
+              size="sm" 
+              onClick={() => setShowToolsMenu(!showToolsMenu)} 
+              className={`flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 rounded-lg p-2 transition-colors min-h-[44px] min-w-[44px] ${showToolsMenu ? 'bg-slate-700 text-white' : ''}`}
+            >
               <Plus className="h-4 w-4" />
             </Button>
 
             {/* Input field */}
-            <ExpandablePromptInput ref={inputRef} value={input} onChange={setInput} placeholder="Ask anything" className="flex-1 bg-transparent border-none text-foreground placeholder:text-muted-foreground focus:outline-none" onKeyDown={e => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSubmit(e);
-            }
-          }} />
+            <ExpandablePromptInput 
+              ref={inputRef} 
+              value={input} 
+              onChange={setInput} 
+              placeholder="Ask anything" 
+              className="flex-1 bg-transparent border-none text-foreground placeholder:text-muted-foreground focus:outline-none min-h-[44px] text-base" 
+              onKeyDown={e => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSubmit(e);
+                }
+              }} 
+            />
 
             {/* Right side buttons */}
             <div className="flex items-center gap-2">
               {/* Voice input button */}
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button type="button" variant="ghost" size="icon" className={`h-6 w-6 rounded-full ${isListening ? 'text-blue-400 animate-pulse' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-700'} transition-colors`} onClick={handleVoiceSearch} disabled={isListening}>
+                  <Button 
+                    type="button" 
+                    variant="ghost" 
+                    size="icon" 
+                    className={`min-h-[44px] min-w-[44px] rounded-full ${isListening ? 'text-blue-400 animate-pulse' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-700'} transition-colors`} 
+                    onClick={handleVoiceSearch} 
+                    disabled={isListening}
+                  >
                     <Mic className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
@@ -547,8 +567,12 @@ const ChatPanelContent = ({
               {/* Send button - only visible when there's text */}
               {input.trim() && <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button type="submit" disabled={isLoading} className="h-6 w-6 rounded-full bg-blue-600 text-white hover:bg-blue-500 p-0 transition-colors">
-                      <Send className="h-3 w-3" />
+                    <Button 
+                      type="submit" 
+                      disabled={isLoading} 
+                      className="min-h-[44px] min-w-[44px] rounded-full bg-blue-600 text-white hover:bg-blue-500 p-0 transition-colors"
+                    >
+                      <Send className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
