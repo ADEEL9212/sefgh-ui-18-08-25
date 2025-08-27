@@ -471,7 +471,6 @@ const ChatPanelContent = ({
                   
                   {/* Study and Learn */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                console.log('Study and Learn tool launched');
                 setShowToolsMenu(false);
               }}>
                     <BookOpen className="h-5 w-5 text-gray-300" />
@@ -480,7 +479,6 @@ const ChatPanelContent = ({
                   
                   {/* Think Longer */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                console.log('Think Longer tool launched');
                 setShowToolsMenu(false);
               }}>
                     <Lightbulb className="h-5 w-5 text-gray-300" />
@@ -489,7 +487,6 @@ const ChatPanelContent = ({
                   
                   {/* Deep Research */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                console.log('Deep Research tool launched');
                 setShowToolsMenu(false);
               }}>
                     <Search className="h-5 w-5 text-gray-300" />
@@ -510,7 +507,6 @@ const ChatPanelContent = ({
                   
                   {/* Gitee search */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                console.log('Gitee search tool launched');
                 setShowToolsMenu(false);
               }}>
                     <Code className="h-5 w-5 text-gray-300" />
@@ -543,7 +539,6 @@ const ChatPanelContent = ({
                         <div className="space-y-1">
                           {/* Web Search */}
                           <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                      console.log('Web Search tool launched');
                       setShowToolsMenu(false);
                       setShowMoreMenu(false);
                     }}>

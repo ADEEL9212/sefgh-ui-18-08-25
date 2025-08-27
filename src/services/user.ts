@@ -51,8 +51,6 @@ export const updateUserProfile = async (body: Partial<UserProfile>): Promise<Use
   const currentUser = await getCurrentUser();
   const updatedUser = { ...currentUser, ...body };
   
-  console.log('API call: updateUserProfile', body);
-  
   return updatedUser;
 };
 
@@ -76,8 +74,6 @@ export const uploadAvatar = async (file: File): Promise<string> => {
   // For now, create a local blob URL
   const avatarUrl = URL.createObjectURL(file);
   
-  console.log('API call: uploadAvatar', file.name);
-  
   return avatarUrl;
 };
 
@@ -90,8 +86,6 @@ export const connectOrcid = async (): Promise<{ orcidId: string; connected: bool
   // In a real app, this would initiate OAuth flow with ORCID
   // For now, simulate successful connection
   const orcidId = '0000-0002-1825-0097';
-  
-  console.log('API call: connectOrcid');
   
   return { orcidId, connected: true };
 };
