@@ -9,6 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import { ChatService } from '@/services/chatService';
 import { LazyWrapper, LazyLoadingSpinner } from './common/LazyComponents';
 import { WorkbenchData } from './workbench/WorkbenchPanel';
+import { FullscreenProvider, useFullscreen } from '@/contexts/FullscreenContext';
 
 // Lazy load heavy components for better mobile performance
 const LazyNavigationPanel = lazy(() => 
@@ -120,10 +121,11 @@ const initialState: AppState = {
   hasUnsavedChanges: false,
 };
 
-export const MainApp = () => {
+export const MainAppContent = () => {
   const [state, setState] = useState<AppState>(initialState);
   const [chatKey, setChatKey] = useState(0); // Add this line
   const { toast } = useToast();
+  const { isFullscreen, fullscreenComponent } = useFullscreen();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const chatInputRef = useRef<HTMLTextAreaElement>(null);
   const currentAbortControllerRef = useRef<AbortController | null>(null);
@@ -680,32 +682,38 @@ export const MainApp = () => {
       />
 
       <main className="flex-1 flex pt-14 overflow-hidden relative">
-        {/* Mobile overlay for navigation/search panels */}
-        {(state.isNavOpen || state.isSearchVisible) && (
+        {/* Mobile overlay for navigation/search panels - hide in fullscreen */}
+        {(state.isNavOpen || state.isSearchVisible) && !isFullscreen && (
           <div 
             className="fixed inset-0 bg-black/50 z-30 lg:hidden"
             onClick={() => updateState({ isNavOpen: false, isSearchVisible: false })}
           />
         )}
 
-        <LazyWrapper fallback={<LazyLoadingSpinner />}>
-          <LazyNavigationPanel
-            isOpen={state.isNavOpen}
-            activeView={state.activeView}
-            theme={state.theme}
-            onViewChange={setActiveView}
-            onThemeToggle={toggleTheme}
-            onClose={() => updateState({ isNavOpen: false })}
-          />
-        </LazyWrapper>
+        {/* Navigation panel - hide in fullscreen */}
+        {!isFullscreen && (
+          <LazyWrapper fallback={<LazyLoadingSpinner />}>
+            <LazyNavigationPanel
+              isOpen={state.isNavOpen}
+              activeView={state.activeView}
+              theme={state.theme}
+              onViewChange={setActiveView}
+              onThemeToggle={toggleTheme}
+              onClose={() => updateState({ isNavOpen: false })}
+            />
+          </LazyWrapper>
+        )}
 
         <div className="flex-1 flex overflow-hidden">
-          <div className="flex-1 overflow-hidden min-w-0">
-            {renderActivePanel()}
-          </div>
+          {/* Main content area - hide in fullscreen when showing panels */}
+          {!(isFullscreen && (fullscreenComponent === 'github-search' || fullscreenComponent === 'workbench')) && (
+            <div className="flex-1 overflow-hidden min-w-0">
+              {renderActivePanel()}
+            </div>
+          )}
 
           <SearchPanel
-            isVisible={state.isSearchVisible}
+            isVisible={state.isSearchVisible || (isFullscreen && fullscreenComponent === 'github-search')}
             onClose={() => updateState({ isSearchVisible: false, githubSearchQuery: undefined })}
             inputRef={searchInputRef}
             autoSearchQuery={state.githubSearchQuery}
@@ -714,7 +722,7 @@ export const MainApp = () => {
 
           <LazyWrapper fallback={<LazyLoadingSpinner />}>
             <LazyWorkbenchPanel
-              isOpen={state.isWorkbenchOpen}
+              isOpen={state.isWorkbenchOpen || (isFullscreen && fullscreenComponent === 'workbench')}
               workbench={state.currentWorkbench}
               hasUnsavedChanges={state.hasUnsavedChanges}
               onClose={closeWorkbench}
@@ -737,5 +745,13 @@ export const MainApp = () => {
         onToggleTheme={toggleTheme}
       />
     </div>
+  );
+};
+
+export const MainApp = () => {
+  return (
+    <FullscreenProvider>
+      <MainAppContent />
+    </FullscreenProvider>
   );
 };

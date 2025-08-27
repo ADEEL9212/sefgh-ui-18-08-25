@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
+import { useFullscreen } from '@/contexts/FullscreenContext';
+import { FullscreenToggle } from '@/components/common/FullscreenToggle';
 
 interface CanvasData {
   id: string;
@@ -37,8 +39,13 @@ export const CanvasPanel: React.FC<CanvasPanelProps> = ({
   const [isEditing, setIsEditing] = useState(false);
   const [tempTitle, setTempTitle] = useState('');
   const { toast } = useToast();
+  const { isFullscreen, fullscreenComponent } = useFullscreen();
   const editorRef = useRef<HTMLTextAreaElement>(null);
   const titleInputRef = useRef<HTMLInputElement>(null);
+
+  // Component identifier for fullscreen
+  const componentId = 'canvas';
+  const isComponentFullscreen = isFullscreen && fullscreenComponent === componentId;
 
   useEffect(() => {
     if (canvas) {
@@ -151,21 +158,26 @@ export const CanvasPanel: React.FC<CanvasPanelProps> = ({
     }
   };
 
-  if (!isOpen || !canvas) return null;
+  if (!isOpen && !isComponentFullscreen) return null;
+  if (!canvas) return null;
 
   const ModeIcon = getModeIcon(canvas.mode);
 
   return (
-    <div className={`fixed inset-0 z-50 flex ${isOpen ? 'animate-fade-in' : 'animate-fade-out'}`}>
+    <div className={`fixed inset-0 z-50 flex ${isOpen || isComponentFullscreen ? 'animate-fade-in' : 'animate-fade-out'}`}>
       {/* Mobile backdrop */}
-      <div className="fixed inset-0 bg-black/20 backdrop-blur-sm md:hidden" onClick={handleClose} />
+      {!isComponentFullscreen && (
+        <div className="fixed inset-0 bg-black/20 backdrop-blur-sm md:hidden" onClick={handleClose} />
+      )}
       
       {/* Canvas Panel */}
       <div className={`
-        ml-auto h-full bg-background border-l shadow-2xl
-        w-full md:w-[40%] lg:w-[35%] xl:w-[30%]
-        transform transition-transform duration-200 ease-out
-        ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+        ${isComponentFullscreen 
+          ? 'w-full h-full bg-background' 
+          : 'ml-auto h-full bg-background border-l shadow-2xl w-full md:w-[40%] lg:w-[35%] xl:w-[30%]'
+        }
+        transform transition-all duration-300 ease-out
+        ${isOpen || isComponentFullscreen ? 'translate-x-0' : 'translate-x-full'}
       `}>
         <Card className="h-full rounded-none border-0 flex flex-col">
           {/* Header */}
@@ -227,6 +239,10 @@ export const CanvasPanel: React.FC<CanvasPanelProps> = ({
               <Button variant="ghost" size="sm" onClick={handleExport} title="Export">
                 <Download className="h-4 w-4" />
               </Button>
+              
+              <FullscreenToggle 
+                componentId={componentId}
+              />
               
               <Button variant="ghost" size="sm" onClick={handleClose} title="Close (Esc)">
                 <X className="h-4 w-4" />
