@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Filter, BookOpen, Lightbulb, Brain, Globe, PenTool, ChevronDown, Settings } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 
 interface Tool {
   id: string;

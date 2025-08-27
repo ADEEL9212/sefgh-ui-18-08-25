@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { ExpandablePromptInput } from '@/components/ExpandablePromptInput';
-import { ToolsDropdown } from '@/components/ToolsDropdown';
+import { ExpandablePromptInput } from '@/components/input/ExpandablePromptInput';
+import { ToolsDropdown } from '@/components/common/ToolsDropdown';
 import { Card, CardContent } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Send, Copy, RotateCcw, Edit3, Trash2, User, Bot, Loader2, Plus, Paperclip, HardDrive, Code, Mic, Settings, Github, ImageIcon, Lightbulb, Globe, PaintBucket, ChevronDown, ChevronRight, BookOpen, Filter, X, Search, MoreHorizontal, Download, Share2, FileText, FileDown, File } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { ChatService } from '@/services/chatService';
-import { ThinkingAnimation } from '@/components/ThinkingAnimation';
+import { ThinkingAnimation } from '@/components/common/ThinkingAnimation';
 import { ChatProvider, useChat } from '@/providers/ChatProvider';
 interface Message {
   id: string;

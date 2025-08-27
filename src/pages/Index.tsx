@@ -1,10 +1,10 @@
-import { SEFGHApp } from '@/components/SEFGHApp';
+import { MainApp } from '@/components/MainApp';
 import { PageTransition } from '@/components/ui/PageTransition';
 
 const Index = () => {
   return (
     <PageTransition>
-      <SEFGHApp />
+      <MainApp />
     </PageTransition>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { AppHeader } from './AppHeader';
-import { NavigationPanel } from './NavigationPanel';
-import { SearchPanel } from './SearchPanel';
-import { ChatPanel } from './ChatPanel';
+import { AppHeader } from './layout/AppHeader';
+import { NavigationPanel } from './navigation/NavigationPanel';
+import { SearchPanel } from './search/SearchPanel';
+import { ChatPanel } from './chat/ChatPanel';
 import { ChatManager } from './chat/ChatManager';
-import { KeyboardShortcuts } from './KeyboardShortcuts';
+import { KeyboardShortcuts } from './common/KeyboardShortcuts';
 import { HistoryPanel } from './panels/HistoryPanel';
 import { LanguagePanel } from './panels/LanguagePanel';
 import { ConsolePanel } from './panels/ConsolePanel';
@@ -93,7 +93,7 @@ const initialState: AppState = {
   hasUnsavedChanges: false,
 };
 
-export const SEFGHApp = () => {
+export const MainApp = () => {
   const [state, setState] = useState<AppState>(initialState);
   const [chatKey, setChatKey] = useState(0); // Add this line
   const { toast } = useToast();

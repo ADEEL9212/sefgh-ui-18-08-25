@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 import { ChatService, Message, ChatSession } from '@/services/chatService';
 import { HistoryPanel } from '@/components/panels/HistoryPanel';
-import { ChatPanel } from '@/components/ChatPanel';
+import { ChatPanel } from '@/components/chat/ChatPanel';
 import { useToast } from '@/hooks/use-toast';
 import { useThinkingState } from '@/hooks/useThinkingState';
 

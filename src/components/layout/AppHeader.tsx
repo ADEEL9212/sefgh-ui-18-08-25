@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { UserProfileDropdown } from './UserProfileDropdown';
-import { AccountSettingsPanel } from './AccountSettingsPanel';
-import { KeyboardShortcuts } from './KeyboardShortcuts';
+import { UserProfileDropdown } from '../profile/UserProfileDropdown';
+import { AccountSettingsPanel } from '../settings/AccountSettingsPanel';
+import { KeyboardShortcuts } from '../common/KeyboardShortcuts';
 import { LayoutGrid, Search, Sun, Moon, User, Github, ChevronDown, Share2 } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 interface AppHeaderProps {

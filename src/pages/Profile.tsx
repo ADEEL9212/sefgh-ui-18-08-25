@@ -17,7 +17,7 @@ import { Separator } from '@/components/ui/separator';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { ProfilePictureUpload } from '@/components/profile/ProfilePictureUpload';
-import { PublicProfileSection } from '@/components/PublicProfileSection';
+import { PublicProfileSection } from '@/components/profile/PublicProfileSection';
 import { useUser } from '@/contexts/UserContext';
 import { useToast } from '@/hooks/use-toast';
 

@@ -28,7 +28,7 @@ import TestKeyPanel from '@/components/panels/TestKeyPanel';
 import ModelsPanel from '@/components/panels/ModelsPanel';
 import UsagePanel from '@/components/panels/UsagePanel';
 import SettingsManagementPanel from '@/components/panels/SettingsManagementPanel';
-import { ShareableLinkManager } from '@/components/ShareableLinkManager';
+import { ShareableLinkManager } from '@/components/sharing/ShareableLinkManager';
 
 const Settings = () => {
   const navigate = useNavigate();
