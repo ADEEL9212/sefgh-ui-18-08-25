@@ -5,7 +5,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { UserProfileDropdown } from '../profile/UserProfileDropdown';
 import { AccountSettingsPanel } from '../settings/AccountSettingsPanel';
 import { KeyboardShortcuts } from '../common/KeyboardShortcuts';
-import { LayoutGrid, Search, Sun, Moon, User, Github, ChevronDown, Share2 } from 'lucide-react';
+import { LayoutGrid, Search, Sun, Moon, User, Github, ChevronDown, Share2, Menu } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 interface AppHeaderProps {
   theme: 'light' | 'dark';
@@ -64,14 +64,32 @@ export const AppHeader = ({
   return <header className="fixed top-0 left-0 right-0 z-50 h-14 glass-effect border-b">
       <div className="h-full flex items-center justify-between px-4">
         {/* Left side */}
-        <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-3">
-            <div className="text-xl font-bold bg-gradient-to-r from-brand to-accent bg-clip-text text-transparent">
+        <div className="flex items-center gap-3">
+          {/* Mobile hamburger menu */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={onNavToggle}
+                className="md:hidden min-h-[44px] min-w-[44px] p-2"
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Open Menu</p>
+            </TooltipContent>
+          </Tooltip>
+
+          {/* Desktop branding and version selector */}
+          <div className="flex items-center gap-3">
+            <div className="text-lg md:text-xl font-bold bg-gradient-to-r from-brand to-accent bg-clip-text text-transparent">
               SEFGH-AI
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="gap-2">
+                <Button variant="ghost" size="sm" className="gap-2 hidden md:flex">
                   {versions.find(v => v.id === selectedVersion)?.label}
                   <ChevronDown className="h-4 w-4" />
                 </Button>
@@ -87,19 +105,28 @@ export const AppHeader = ({
         </div>
 
         {/* Right side */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
+          {/* Mobile search button - higher priority */}
           <Tooltip>
             <TooltipTrigger asChild>
-              
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={onSearchToggle}
+                className="min-h-[44px] min-w-[44px] p-2 md:hidden"
+              >
+                <Search className="h-5 w-5 text-green-500" />
+              </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Share</p>
+              <p>Search GitHub</p>
             </TooltipContent>
           </Tooltip>
 
+          {/* Desktop action buttons */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" size="sm" onClick={() => window.open('https://github.com/sefgh-ai', '_blank')} className="hidden md:flex">
+              <Button variant="ghost" size="sm" onClick={() => window.open('https://github.com/sefgh-ai', '_blank')} className="hidden md:flex min-h-[44px] min-w-[44px]">
                 <Github className="h-4 w-4 text-gray-600" />
               </Button>
             </TooltipTrigger>
@@ -110,7 +137,12 @@ export const AppHeader = ({
           
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" size="sm" onClick={onNavToggle}>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={onNavToggle}
+                className="hidden md:flex min-h-[44px] min-w-[44px]"
+              >
                 <LayoutGrid className="h-4 w-4 text-blue-500" />
               </Button>
             </TooltipTrigger>
@@ -121,7 +153,12 @@ export const AppHeader = ({
           
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" size="sm" onClick={onSearchToggle}>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={onSearchToggle}
+                className="hidden md:flex min-h-[44px] min-w-[44px]"
+              >
                 <Search className="h-4 w-4 text-green-500" />
               </Button>
             </TooltipTrigger>
@@ -132,7 +169,12 @@ export const AppHeader = ({
           
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" size="sm" onClick={onThemeToggle} className="hidden md:flex">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={onThemeToggle} 
+                className="hidden md:flex min-h-[44px] min-w-[44px]"
+              >
                 {theme === 'dark' ? <Sun className="h-4 w-4 text-yellow-500" /> : <Moon className="h-4 w-4 text-purple-500" />}
               </Button>
             </TooltipTrigger>
@@ -141,11 +183,17 @@ export const AppHeader = ({
             </TooltipContent>
           </Tooltip>
           
+          {/* User profile - always visible but condensed on mobile */}
           <div className="relative">
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="ghost" size="sm" onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)} className="gap-2">
-                  <Avatar className="h-6 w-6">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)} 
+                  className="gap-2 min-h-[44px] px-2 md:px-3"
+                >
+                  <Avatar className="h-6 w-6 md:h-7 md:w-7">
                     <AvatarImage src={currentUser.avatar} alt={currentUser.name} />
                     <AvatarFallback className="text-xs">
                       {currentUser.name.split(' ').map(n => n[0]).join('')}

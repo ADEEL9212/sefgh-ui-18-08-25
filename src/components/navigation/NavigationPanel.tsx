@@ -53,15 +53,16 @@ export const NavigationPanel = ({
   return (
     <div className={`
       fixed lg:static inset-0 lg:inset-auto
-      w-full lg:w-80 
+      w-full sm:w-80 lg:w-80 
       bg-surface lg:bg-sidebar
       border-r border-border
       z-40 lg:z-auto
       animate-slide-in-left
       flex flex-col
+      transition-transform duration-300 ease-in-out
     `}>
       {/* Mobile header */}
-      <div className="lg:hidden flex items-center justify-between p-4 border-b">
+      <div className="lg:hidden flex items-center justify-between p-4 border-b bg-background/95 backdrop-blur-sm">
         <div className="text-xl font-bold bg-gradient-to-r from-brand to-accent bg-clip-text text-transparent">
           SEFGH-AI
         </div>
@@ -72,6 +73,7 @@ export const NavigationPanel = ({
                 variant="ghost"
                 size="sm"
                 onClick={() => window.open('https://github.com/sefgh-ai', '_blank')}
+                className="min-h-[44px] min-w-[44px]"
               >
                 <Github className="h-4 w-4" />
               </Button>
@@ -86,6 +88,7 @@ export const NavigationPanel = ({
                 variant="ghost"
                 size="sm"
                 onClick={onThemeToggle}
+                className="min-h-[44px] min-w-[44px]"
               >
                 {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </Button>
@@ -100,6 +103,7 @@ export const NavigationPanel = ({
                 variant="ghost"
                 size="sm"
                 onClick={onClose}
+                className="min-h-[44px] min-w-[44px]"
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -112,14 +116,14 @@ export const NavigationPanel = ({
       </div>
 
       {/* Navigation items */}
-      <nav className="flex-1 p-4">
-        <div className="space-y-1">
+      <nav className="flex-1 p-4 overflow-y-auto mobile-scroll smooth-scroll">
+        <div className="space-y-2">
           {navigationItems.map((item) => (
             <Tooltip key={item.id}>
               <TooltipTrigger asChild>
                 <Button
                   variant={activeView === item.id ? "default" : "ghost"}
-                  className="w-full justify-start gap-3 transition-all duration-200 hover:scale-[1.02] hover:bg-accent/50"
+                  className="w-full justify-start gap-3 h-12 px-4 text-left transition-all duration-200 hover:scale-[1.02] hover:bg-accent/50 touch-target"
                   onClick={() => {
                     if (item.id === 'history' || item.id === 'new-chat') {
                       onViewChange(item.id);
@@ -136,8 +140,8 @@ export const NavigationPanel = ({
                     }
                   }}
                 >
-                  <item.icon className="h-4 w-4" />
-                  {item.label}
+                  <item.icon className="h-5 w-5 flex-shrink-0" />
+                  <span className="flex-1">{item.label}</span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent side="right">
