@@ -6,7 +6,7 @@
 import React, { useRef, useState } from 'react';
 import { ChatProvider } from '@/providers/ChatProvider';
 import { ChatPanel } from './ChatPanel';
-import { ThinkingAnimation } from './ThinkingAnimation';
+import { ThinkingAnimation } from '../common/ThinkingAnimation';
 import { ThoughtTimeline, useThoughtTimeline } from './chat/ThoughtTimeline';
 import { useChat } from '@/providers/ChatProvider';
 import { useSimulatedStream } from '@/hooks/useStreamSSE';

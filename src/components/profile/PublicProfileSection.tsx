@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Switch } from './ui/switch';
-import { Badge } from './ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Switch } from '../ui/switch';
+import { Badge } from '../ui/badge';
 import { Share2, Copy, QrCode, Eye, Calendar } from 'lucide-react';
 import { toast } from 'sonner';
-import { ShareModal } from './ShareModal';
+import { ShareModal } from '../sharing/ShareModal';
 
 interface PublicProfileSectionProps {
   profileData: {

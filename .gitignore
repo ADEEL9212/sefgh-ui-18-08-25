@@ -8,7 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-
+dist
+dist-ssr
 
 *.local
 
@@ -22,3 +23,23 @@ node_modules
 *.njsproj
 *.sln
 *.sw?
+
+# Runtime and build artifacts
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+.vite/
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# IDE specific files
+*.swp
+*~

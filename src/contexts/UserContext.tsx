@@ -86,7 +86,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       setProfile(prev => ({ ...prev, ...updates }));
       
       // Mock API call would go here
-      console.log('Profile updated:', updates);
+      // Profile updated successfully
     } catch (error) {
       console.error('Failed to update profile:', error);
       throw error;

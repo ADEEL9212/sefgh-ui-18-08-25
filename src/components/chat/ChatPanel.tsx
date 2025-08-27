@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { ExpandablePromptInput } from '@/components/ExpandablePromptInput';
-import { ToolsDropdown } from '@/components/ToolsDropdown';
+import { ExpandablePromptInput } from '@/components/input/ExpandablePromptInput';
+import { ToolsDropdown } from '@/components/common/ToolsDropdown';
 import { Card, CardContent } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Send, Copy, RotateCcw, Edit3, Trash2, User, Bot, Loader2, Plus, Paperclip, HardDrive, Code, Mic, Settings, Github, ImageIcon, Lightbulb, Globe, PaintBucket, ChevronDown, ChevronRight, BookOpen, Filter, X, Search, MoreHorizontal, Download, Share2, FileText, FileDown, File } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { ChatService } from '@/services/chatService';
-import { ThinkingAnimation } from '@/components/ThinkingAnimation';
+import { ThinkingAnimation } from '@/components/common/ThinkingAnimation';
 import { ChatProvider, useChat } from '@/providers/ChatProvider';
 interface Message {
   id: string;
@@ -471,7 +471,6 @@ const ChatPanelContent = ({
                   
                   {/* Study and Learn */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                console.log('Study and Learn tool launched');
                 setShowToolsMenu(false);
               }}>
                     <BookOpen className="h-5 w-5 text-gray-300" />
@@ -480,7 +479,6 @@ const ChatPanelContent = ({
                   
                   {/* Think Longer */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                console.log('Think Longer tool launched');
                 setShowToolsMenu(false);
               }}>
                     <Lightbulb className="h-5 w-5 text-gray-300" />
@@ -489,7 +487,6 @@ const ChatPanelContent = ({
                   
                   {/* Deep Research */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                console.log('Deep Research tool launched');
                 setShowToolsMenu(false);
               }}>
                     <Search className="h-5 w-5 text-gray-300" />
@@ -510,7 +507,6 @@ const ChatPanelContent = ({
                   
                   {/* Gitee search */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                console.log('Gitee search tool launched');
                 setShowToolsMenu(false);
               }}>
                     <Code className="h-5 w-5 text-gray-300" />
@@ -543,7 +539,6 @@ const ChatPanelContent = ({
                         <div className="space-y-1">
                           {/* Web Search */}
                           <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                      console.log('Web Search tool launched');
                       setShowToolsMenu(false);
                       setShowMoreMenu(false);
                     }}>
