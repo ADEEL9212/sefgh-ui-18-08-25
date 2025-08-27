@@ -2,11 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { ExpandablePromptInput } from '@/components/input/ExpandablePromptInput';
-import { ToolsDropdown } from '@/components/common/ToolsDropdown';
 import { Card, CardContent } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Send, Copy, RotateCcw, Edit3, Trash2, User, Bot, Loader2, Plus, Paperclip, HardDrive, Code, Mic, Settings, Github, ImageIcon, Lightbulb, Globe, PaintBucket, ChevronDown, ChevronRight, BookOpen, Filter, X, Search, MoreHorizontal, Download, Share2, FileText, FileDown, File } from 'lucide-react';
+import { Send, Copy, RotateCcw, Edit3, Trash2, User, Bot, Loader2, Plus, Paperclip, HardDrive, Code, Mic, Settings, Github, ImageIcon, Lightbulb, Globe, PaintBucket, ChevronDown, Filter, X, Search, Download, Share2, FileText, FileDown, File } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { ChatService } from '@/services/chatService';
 import { ThinkingAnimation } from '@/components/common/ThinkingAnimation';
@@ -50,7 +49,6 @@ const ChatPanelContent = ({
   const [editContent, setEditContent] = useState('');
   const [showAttachMenu, setShowAttachMenu] = useState(false);
   const [showToolsMenu, setShowToolsMenu] = useState(false);
-  const [showMoreMenu, setShowMoreMenu] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -92,7 +90,6 @@ const ChatPanelContent = ({
       }
       if (showToolsMenu && !(event.target as Element).closest('.tools-menu-container')) {
         setShowToolsMenu(false);
-        setShowMoreMenu(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -469,13 +466,6 @@ const ChatPanelContent = ({
                   {/* Separator */}
                   <div className="h-px bg-gray-600 my-2"></div>
                   
-                  {/* Study and Learn */}
-                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                setShowToolsMenu(false);
-              }}>
-                    <BookOpen className="h-5 w-5 text-gray-300" />
-                    <span className="text-sm font-medium text-gray-200">Study and learn</span>
-                  </div>
                   
                   {/* Think Longer */}
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
@@ -503,60 +493,6 @@ const ChatPanelContent = ({
               }}>
                     <Github className="h-5 w-5 text-gray-300" />
                     <span className="text-sm font-medium text-gray-200">GitHub search</span>
-                  </div>
-                  
-                  {/* Gitee search */}
-                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                setShowToolsMenu(false);
-              }}>
-                    <Code className="h-5 w-5 text-gray-300" />
-                    <span className="text-sm font-medium text-gray-200">Gitee search</span>
-                  </div>
-                  
-                  {/* Separator */}
-                  <div className="h-px bg-gray-600 my-2"></div>
-                  
-                  {/* More menu */}
-                  <div className="flex items-center justify-between gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150 relative" onMouseEnter={() => setShowMoreMenu(true)} onMouseLeave={e => {
-                // Only hide if not moving to the submenu
-                const rect = e.currentTarget.getBoundingClientRect();
-                const submenuRect = e.currentTarget.querySelector('.submenu-panel')?.getBoundingClientRect();
-                if (submenuRect && e.clientX >= submenuRect.left && e.clientX <= submenuRect.right && e.clientY >= submenuRect.top && e.clientY <= submenuRect.bottom) {
-                  return;
-                }
-                setTimeout(() => setShowMoreMenu(false), 100);
-              }}>
-                    <div className="flex items-center gap-3">
-                      <MoreHorizontal className="h-5 w-5 text-gray-300" />
-                      <span className="text-sm font-medium text-gray-200">More</span>
-                    </div>
-                    <ChevronRight className="h-4 w-4 text-gray-400" />
-                    
-                    {/* Secondary dropdown panel */}
-                    {showMoreMenu && <div className="submenu-panel absolute left-full top-0 ml-1 bg-gray-900 dark:bg-gray-800 text-white rounded-xl shadow-2xl p-4 w-48 z-[60]" style={{
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.2)'
-                }} onMouseEnter={() => setShowMoreMenu(true)} onMouseLeave={() => setTimeout(() => setShowMoreMenu(false), 100)}>
-                        <div className="space-y-1">
-                          {/* Web Search */}
-                          <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                      setShowToolsMenu(false);
-                      setShowMoreMenu(false);
-                    }}>
-                            <Globe className="h-5 w-5 text-gray-300" />
-                            <span className="text-sm font-medium text-gray-200">Web search</span>
-                          </div>
-                          
-                          {/* Canvas */}
-                          <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer transition-all duration-150" onClick={() => {
-                      onOpenCanvas?.();
-                      setShowToolsMenu(false);
-                      setShowMoreMenu(false);
-                    }}>
-                            <PaintBucket className="h-5 w-5 text-gray-300" />
-                            <span className="text-sm font-medium text-gray-200">Canvas</span>
-                          </div>
-                        </div>
-                      </div>}
                   </div>
                 </div>
               </div>
