@@ -1,20 +1,47 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, Suspense, lazy } from 'react';
 import { AppHeader } from './layout/AppHeader';
-import { NavigationPanel } from './navigation/NavigationPanel';
 import { SearchPanel } from './search/SearchPanel';
 import { ChatPanel } from './chat/ChatPanel';
 import { ChatManager } from './chat/ChatManager';
 import { KeyboardShortcuts } from './common/KeyboardShortcuts';
-import { HistoryPanel } from './panels/HistoryPanel';
-import { LanguagePanel } from './panels/LanguagePanel';
-import { ConsolePanel } from './panels/ConsolePanel';
-import { ProxyPanel } from './panels/ProxyPanel';
-import { AllPagesPanel } from './panels/AllPagesPanel';
-import { AnimationShowcase } from './panels/AnimationShowcase';
-import { WorkbenchPanel, WorkbenchData } from './workbench/WorkbenchPanel';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { ChatService } from '@/services/chatService';
+import { LazyWrapper, LazyLoadingSpinner } from './common/LazyComponents';
+import { WorkbenchData } from './workbench/WorkbenchPanel';
+
+// Lazy load heavy components for better mobile performance
+const LazyNavigationPanel = lazy(() => 
+  import('./navigation/NavigationPanel').then(module => ({ default: module.NavigationPanel }))
+);
+
+const LazyWorkbenchPanel = lazy(() => 
+  import('./workbench/WorkbenchPanel').then(module => ({ default: module.WorkbenchPanel }))
+);
+
+const LazyHistoryPanel = lazy(() => 
+  import('./panels/HistoryPanel').then(module => ({ default: module.HistoryPanel }))
+);
+
+const LazyLanguagePanel = lazy(() => 
+  import('./panels/LanguagePanel').then(module => ({ default: module.LanguagePanel }))
+);
+
+const LazyConsolePanel = lazy(() => 
+  import('./panels/ConsolePanel').then(module => ({ default: module.ConsolePanel }))
+);
+
+const LazyProxyPanel = lazy(() => 
+  import('./panels/ProxyPanel').then(module => ({ default: module.ProxyPanel }))
+);
+
+const LazyAllPagesPanel = lazy(() => 
+  import('./panels/AllPagesPanel').then(module => ({ default: module.AllPagesPanel }))
+);
+
+const LazyAnimationShowcase = lazy(() => 
+  import('./panels/AnimationShowcase').then(module => ({ default: module.AnimationShowcase }))
+);
 
 interface Message {
   id: string;
@@ -566,36 +593,50 @@ export const MainApp = () => {
         );
       case 'language':
         return (
-          <LanguagePanel
-            selectedLanguage={state.selectedLanguage}
-            onLanguageChange={(language) => {
-              updateState({ selectedLanguage: language });
-              toast({
-                title: "Language Changed",
-                description: `Interface language changed to ${language.toUpperCase()}`,
-                duration: 2000,
-              });
-            }}
-          />
+          <LazyWrapper>
+            <LazyLanguagePanel
+              selectedLanguage={state.selectedLanguage}
+              onLanguageChange={(language) => {
+                updateState({ selectedLanguage: language });
+                toast({
+                  title: "Language Changed",
+                  description: `Interface language changed to ${language.toUpperCase()}`,
+                  duration: 2000,
+                });
+              }}
+            />
+          </LazyWrapper>
         );
       case 'console':
         return (
-          <ConsolePanel
-            logs={state.consoleLogs}
-            onClearLogs={() => updateState({ consoleLogs: [] })}
-          />
+          <LazyWrapper>
+            <LazyConsolePanel
+              logs={state.consoleLogs}
+              onClearLogs={() => updateState({ consoleLogs: [] })}
+            />
+          </LazyWrapper>
         );
       case 'proxy':
         return (
-          <ProxyPanel
-            settings={state.proxySettings}
-            onSettingsChange={(settings) => updateState({ proxySettings: settings })}
-          />
+          <LazyWrapper>
+            <LazyProxyPanel
+              settings={state.proxySettings}
+              onSettingsChange={(settings) => updateState({ proxySettings: settings })}
+            />
+          </LazyWrapper>
         );
       case 'all-pages':
-        return <AllPagesPanel onNavigate={setActiveView} />;
+        return (
+          <LazyWrapper>
+            <LazyAllPagesPanel onNavigate={setActiveView} />
+          </LazyWrapper>
+        );
       case 'animation-showcase':
-        return <AnimationShowcase onNavigate={setActiveView} />;
+        return (
+          <LazyWrapper>
+            <LazyAnimationShowcase onNavigate={setActiveView} />
+          </LazyWrapper>
+        );
       case 'docs':
       case 'playground':
       case 'settings':
@@ -612,7 +653,11 @@ export const MainApp = () => {
           </Card>
         );
       default:
-        return <AllPagesPanel onNavigate={setActiveView} />;
+        return (
+          <LazyWrapper>
+            <LazyAllPagesPanel onNavigate={setActiveView} />
+          </LazyWrapper>
+        );
     }
   };
 
@@ -643,14 +688,16 @@ export const MainApp = () => {
           />
         )}
 
-        <NavigationPanel
-          isOpen={state.isNavOpen}
-          activeView={state.activeView}
-          theme={state.theme}
-          onViewChange={setActiveView}
-          onThemeToggle={toggleTheme}
-          onClose={() => updateState({ isNavOpen: false })}
-        />
+        <LazyWrapper fallback={<LazyLoadingSpinner />}>
+          <LazyNavigationPanel
+            isOpen={state.isNavOpen}
+            activeView={state.activeView}
+            theme={state.theme}
+            onViewChange={setActiveView}
+            onThemeToggle={toggleTheme}
+            onClose={() => updateState({ isNavOpen: false })}
+          />
+        </LazyWrapper>
 
         <div className="flex-1 flex overflow-hidden">
           <div className="flex-1 overflow-hidden min-w-0">
@@ -665,17 +712,19 @@ export const MainApp = () => {
             onQueryProcessed={() => updateState({ githubSearchQuery: undefined })}
           />
 
-          <WorkbenchPanel
-            isOpen={state.isWorkbenchOpen}
-            workbench={state.currentWorkbench}
-            hasUnsavedChanges={state.hasUnsavedChanges}
-            onClose={closeWorkbench}
-            onSave={saveWorkbench}
-            onContentChange={updateWorkbenchContent}
-            onTitleChange={updateWorkbenchTitle}
-            onModeChange={updateWorkbenchMode}
-            onLanguageChange={updateWorkbenchLanguage}
-          />
+          <LazyWrapper fallback={<LazyLoadingSpinner />}>
+            <LazyWorkbenchPanel
+              isOpen={state.isWorkbenchOpen}
+              workbench={state.currentWorkbench}
+              hasUnsavedChanges={state.hasUnsavedChanges}
+              onClose={closeWorkbench}
+              onSave={saveWorkbench}
+              onContentChange={updateWorkbenchContent}
+              onTitleChange={updateWorkbenchTitle}
+              onModeChange={updateWorkbenchMode}
+              onLanguageChange={updateWorkbenchLanguage}
+            />
+          </LazyWrapper>
         </div>
       </main>
 
