@@ -37,6 +37,11 @@ interface ChatSession {
   }>;
 }
 
+interface ChatSessionWithHighlight extends ChatSession {
+  highlightTitle: boolean;
+  highlightMessage: boolean;
+}
+
 interface EnhancedHistoryPanelProps {
   sessions: ChatSession[];
   onLoadSession: (sessionId: string) => void;
@@ -53,7 +58,7 @@ export const EnhancedHistoryPanel = ({
   const { toast } = useToast();
 
   // Enhanced fuzzy search with highlighting
-  const filteredSessions = useMemo(() => {
+  const filteredSessions = useMemo((): ChatSessionWithHighlight[] => {
     if (!searchQuery.trim()) return sessions.map(s => ({ ...s, highlightTitle: false, highlightMessage: false }));
     
     const query = searchQuery.toLowerCase();
@@ -272,10 +277,10 @@ export const EnhancedHistoryPanel = ({
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <CardTitle className="text-base mb-2 line-clamp-2">
-                        {highlightText(session.title, (session as any).highlightTitle)}
+                        {highlightText(session.title, session.highlightTitle)}
                       </CardTitle>
                       <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
-                        {highlightText(session.lastMessage, (session as any).highlightMessage)}
+                        {highlightText(session.lastMessage, session.highlightMessage)}
                       </p>
                       <div className="flex items-center gap-4 text-xs text-muted-foreground">
                         <div className="flex items-center gap-1">

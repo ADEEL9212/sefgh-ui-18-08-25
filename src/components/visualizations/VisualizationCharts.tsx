@@ -38,12 +38,22 @@ export const VisualizationCharts = ({ repositories, languageStats, isVisible = t
     color: COLORS[index % COLORS.length]
   }));
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  interface TooltipProps {
+    active?: boolean;
+    payload?: Array<{
+      name: string;
+      value: number;
+      color: string;
+    }>;
+    label?: string;
+  }
+
+  const CustomTooltip = ({ active, payload, label }: TooltipProps) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-background border border-border rounded-lg p-3 shadow-lg">
           <p className="font-medium">{label}</p>
-          {payload.map((entry: any, index: number) => (
+          {payload.map((entry, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
               {entry.name}: {entry.value}
             </p>
@@ -54,7 +64,19 @@ export const VisualizationCharts = ({ repositories, languageStats, isVisible = t
     return null;
   };
 
-  const ScatterTooltip = ({ active, payload }: any) => {
+  interface ScatterTooltipProps {
+    active?: boolean;
+    payload?: Array<{
+      payload: {
+        name: string;
+        stars: number;
+        forks: number;
+        language: string;
+      };
+    }>;
+  }
+
+  const ScatterTooltip = ({ active, payload }: ScatterTooltipProps) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
@@ -127,7 +149,7 @@ export const VisualizationCharts = ({ repositories, languageStats, isVisible = t
                     ))}
                   </Pie>
                   <Tooltip 
-                    formatter={(value: any, name: any) => [`${value} repos`, name]}
+                    formatter={(value: number, name: string) => [`${value} repos`, name]}
                     labelFormatter={(label) => `Language: ${label}`}
                   />
                 </PieChart>

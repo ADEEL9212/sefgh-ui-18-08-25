@@ -1,4 +1,4 @@
-import { SearchHistory, SearchType, SimilarityMetrics, LanguageStats, SearchMetrics } from '@/types/search';
+import { SearchHistory, SearchType, SimilarityMetrics, LanguageStats, SearchMetrics, Repository } from '@/types/search';
 
 export const SEARCH_HISTORY_KEY = 'github-search-history';
 export const MAX_HISTORY_ITEMS = 10;
@@ -28,8 +28,16 @@ export const getSearchHistory = (): SearchHistory[] => {
     const stored = localStorage.getItem(SEARCH_HISTORY_KEY);
     if (!stored) return [];
 
-    const history = JSON.parse(stored);
-    return history.map((item: any) => ({
+    interface StoredSearchHistory {
+      id: string;
+      query: string;
+      type: string;
+      timestamp: string;
+      resultCount: number;
+    }
+
+    const history: StoredSearchHistory[] = JSON.parse(stored);
+    return history.map((item: StoredSearchHistory) => ({
       ...item,
       timestamp: new Date(item.timestamp),
     }));
@@ -71,7 +79,7 @@ export const generateSimilarityMetrics = (): SimilarityMetrics => {
   };
 };
 
-export const calculateLanguageStats = (repositories: any[]): LanguageStats[] => {
+export const calculateLanguageStats = (repositories: Repository[]): LanguageStats[] => {
   const languageMap = new Map<string, { count: number; totalStars: number }>();
 
   repositories.forEach(repo => {
@@ -95,7 +103,7 @@ export const calculateLanguageStats = (repositories: any[]): LanguageStats[] => 
     .sort((a, b) => b.count - a.count);
 };
 
-export const calculateSearchMetrics = (repositories: any[], searchTime: number): SearchMetrics => {
+export const calculateSearchMetrics = (repositories: Repository[], searchTime: number): SearchMetrics => {
   const languageStats = calculateLanguageStats(repositories);
   const totalStars = repositories.reduce((sum, repo) => sum + repo.stargazers_count, 0);
   const totalForks = repositories.reduce((sum, repo) => sum + repo.forks_count, 0);

@@ -706,7 +706,6 @@ export const MainAppContent = () => {
         );
       case 'docs':
       case 'playground':
-      case 'settings':
         return (
           <Card className="m-6">
             <CardHeader>

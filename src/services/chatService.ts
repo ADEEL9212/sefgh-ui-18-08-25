@@ -100,11 +100,25 @@ export class ChatService {
       const stored = localStorage.getItem(this.STORAGE_KEY);
       if (!stored) return [];
       
-      const sessions = JSON.parse(stored);
-      return sessions.map((session: any) => ({
+      interface StoredSession {
+        id: string;
+        title: string;
+        lastMessage: string;
+        timestamp: string;
+        messageCount: number;
+        messages: Array<{
+          id: string;
+          type: 'user' | 'assistant';
+          content: string;
+          timestamp: string;
+        }>;
+      }
+      
+      const sessions: StoredSession[] = JSON.parse(stored);
+      return sessions.map((session: StoredSession) => ({
         ...session,
         timestamp: new Date(session.timestamp),
-        messages: session.messages.map((msg: any) => ({
+        messages: session.messages.map((msg) => ({
           ...msg,
           timestamp: new Date(msg.timestamp)
         }))
@@ -283,7 +297,7 @@ export class ChatService {
       return {
         ...chatData,
         timestamp: new Date(chatData.timestamp),
-        messages: chatData.messages.map((msg: any) => ({
+        messages: chatData.messages.map((msg: { id: string; type: 'user' | 'assistant'; content: string; timestamp: string }) => ({
           ...msg,
           timestamp: new Date(msg.timestamp)
         }))
