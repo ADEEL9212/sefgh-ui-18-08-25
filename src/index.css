@@ -54,7 +54,8 @@ All colors MUST be HSL.
     /* Surface colors */
     --surface: 220 30% 95%;     /* #EDF1F8 - Subtle surface */
     --surface-elevated: 0 0% 100%; /* #FFFFFF - Pure white elevated */
-    --surface-glass: 220 30% 95% / 0.8;
+    --surface-glass: 220 30% 95%;
+    --surface-glass-opacity: 0.8;
 
     /* Card colors */
     --card: 0 0% 100%;          /* #FFFFFF - Clean white */
@@ -67,7 +68,8 @@ All colors MUST be HSL.
     /* Brand colors - Vibrant Indigo */
     --brand: 250 95% 60%;       /* #6C5CE7 - Vibrant indigo */
     --brand-foreground: 0 0% 100%; /* #FFFFFF - White text */
-    --brand-muted: 250 95% 60% / 0.1;
+    --brand-muted: 250 95% 60%;
+    --brand-muted-opacity: 0.1;
 
     /* Primary colors - Vibrant Indigo */
     --primary: 250 95% 60%;     /* #6C5CE7 - Vibrant indigo */
@@ -79,7 +81,7 @@ All colors MUST be HSL.
 
     /* Muted colors */
     --muted: 240 10% 94%;       /* #EFF0F5 - Same as secondary */
-    --muted-foreground: 240 5% 45% / 0.7; /* Light muted text */
+    --muted-foreground: 240 5% 45%;   /* Light muted text */
 
     /* Accent colors - Vibrant Cyan */
     --accent: 190 95% 50%;      /* #0ABDE3 - Fresh cyan */
@@ -94,7 +96,7 @@ All colors MUST be HSL.
     --warning-foreground: 225 25% 20%; /* #2A3040 - Dark text */
 
     /* Border and input */
-    --border: 225 25% 20% / 0.1; /* Foreground with opacity */
+    --border: 225 25% 20%;             /* Border color */
     --input: 240 10% 94%;       /* #EFF0F5 - Same as muted */
     --ring: 250 95% 60%;        /* #6C5CE7 - Primary indigo */
 
@@ -107,7 +109,7 @@ All colors MUST be HSL.
     --sidebar-primary-foreground: 0 0% 100%; /* #FFFFFF - White text */
     --sidebar-accent: 250 30% 25%;     /* #3A3366 - Lighter sidebar accent */
     --sidebar-accent-foreground: 0 0% 100%; /* #FFFFFF - White text */
-    --sidebar-border: 0 0% 100% / 0.1; /* White with opacity */
+    --sidebar-border: 0 0% 100%;       /* Sidebar border */
     --sidebar-ring: 190 95% 50%;       /* #0ABDE3 - Cyan */
   }
 
@@ -120,7 +122,8 @@ All colors MUST be HSL.
     /* Surface colors */
     --surface: 225 30% 12%;      /* #1A1D33 - Slightly lighter than bg */
     --surface-elevated: 225 25% 18%; /* #262C45 - Elevated surfaces */
-    --surface-glass: 225 30% 8% / 0.8;
+    --surface-glass: 225 30% 8%;
+    --surface-glass-opacity: 0.8;
 
     /* Card colors */
     --card: 225 30% 15%;         /* #20244A - Deep blue-purple */
@@ -133,7 +136,8 @@ All colors MUST be HSL.
     /* Brand colors */
     --brand: 250 95% 70%;        /* #876AFF - Brighter indigo */
     --brand-foreground: 220 25% 10%; /* #161829 - Very dark blue */
-    --brand-muted: 250 95% 70% / 0.15;
+    --brand-muted: 250 95% 70%;
+    --brand-muted-opacity: 0.15;
 
     /* Primary colors */
     --primary: 250 95% 70%;      /* #876AFF - Brighter indigo */
@@ -145,7 +149,7 @@ All colors MUST be HSL.
 
     /* Muted colors */
     --muted: 225 30% 20%;        /* #292E57 - Same as secondary */
-    --muted-foreground: 220 25% 70% / 0.8; /* Muted light text */
+    --muted-foreground: 220 25% 70%;   /* Muted light text */
 
     /* Accent colors - Vibrant Cyan */
     --accent: 190 95% 55%;       /* #18C1F0 - Bright cyan */
@@ -160,7 +164,7 @@ All colors MUST be HSL.
     --warning-foreground: 220 25% 10%; /* #161829 - Very dark blue */
 
     /* Border and input */
-    --border: 220 25% 70% / 0.1; /* Light color with opacity */
+    --border: 220 25% 70%;             /* Light color */
     --input: 225 30% 20%;        /* #292E57 - Same as secondary */
     --ring: 190 95% 55%;         /* #18C1F0 - Bright cyan */
 
@@ -171,7 +175,7 @@ All colors MUST be HSL.
     --sidebar-primary-foreground: 225 30% 10%; /* #141625 - Dark blue */
     --sidebar-accent: 225 30% 15%;     /* #20244A - Dark accent */
     --sidebar-accent-foreground: 220 25% 90%; /* #DFE3F3 - Light text */
-    --sidebar-border: 220 25% 90% / 0.1; /* Light with opacity */
+    --sidebar-border: 220 25% 90%;     /* Light sidebar border */
     --sidebar-ring: 190 95% 55%;       /* #18C1F0 - Bright cyan */
   }
 }
@@ -244,13 +248,15 @@ All colors MUST be HSL.
   .card-gradient {
     background: linear-gradient(145deg, 
       hsl(var(--card)), 
-      hsl(var(--card) / 0.8));
+      hsl(var(--card)));
+    opacity: 0.8;
   }
   
   .card-elevated {
     background: linear-gradient(145deg, 
-      hsl(var(--surface-elevated) / 0.9), 
+      hsl(var(--surface-elevated)), 
       hsl(var(--surface-elevated)));
+    opacity: 0.9;
   }
   
   .btn-gradient-primary {
@@ -309,17 +315,19 @@ All colors MUST be HSL.
   
   /* Glassmorphism Elements */
   .glass-panel {
-    background: hsl(var(--background) / 0.7);
+    background: hsl(var(--background));
     backdrop-filter: blur(10px);
-    border: 1px solid hsl(var(--background) / 0.1);
+    border: 1px solid hsl(var(--background));
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    opacity: 0.7;
   }
   
   .dark .glass-panel {
-    background: hsl(var(--background) / 0.7);
+    background: hsl(var(--background));
     backdrop-filter: blur(10px);
-    border: 1px solid hsl(var(--background) / 0.2);
+    border: 1px solid hsl(var(--background));
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    opacity: 0.7;
   }
 
   /* Glass effect utilities */
@@ -349,7 +357,8 @@ All colors MUST be HSL.
     width: 300px;
     height: 300px;
     border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
-    background: hsl(var(--primary) / 0.05);
+    background: hsl(var(--primary));
+    opacity: 0.05;
     filter: blur(40px);
     z-index: -1;
     animation: blob-morph 15s linear infinite;
@@ -432,7 +441,7 @@ All colors MUST be HSL.
     height: 200%;
     background: radial-gradient(
       circle at center,
-      hsl(var(--primary) / 0.03) 0%,
+      rgba(255, 255, 255, 0.03) 0%,
       transparent 40%
     );
     animation: ambient-rotate 60s linear infinite;

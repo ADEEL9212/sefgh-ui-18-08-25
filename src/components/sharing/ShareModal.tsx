@@ -15,7 +15,7 @@ import { supabase } from '@/integrations/supabase/client';
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
-  content: any;
+  content: React.ReactNode | string | object;
   contentType?: string;
   linkType?: 'profile' | 'document' | 'chat' | 'settings' | 'other';
   title?: string;
@@ -100,9 +100,10 @@ export const ShareModal: React.FC<ShareModalProps> = ({
       setIsCreated(true);
       toast.success('Share link created successfully!');
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating share link:', error);
-      toast.error(error.message || 'Failed to create share link');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to create share link';
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
