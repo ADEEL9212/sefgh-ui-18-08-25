@@ -637,6 +637,17 @@ export const MainAppContent = () => {
             </LazyWrapper>
           </SplitViewLayout>
         );
+      case 'github-search':
+        return (
+          <SearchPanel
+            isVisible={true}
+            onClose={() => setActiveView('home')}
+            inputRef={searchInputRef}
+            autoSearchQuery={state.githubSearchQuery}
+            onQueryProcessed={() => updateState({ githubSearchQuery: undefined })}
+            asMainView={true}
+          />
+        );
       case 'home':
       case 'dashboard':
         return (
@@ -733,13 +744,15 @@ export const MainAppContent = () => {
           {renderActivePanel()}
         </div>
 
-        <SearchPanel
-          isVisible={state.isSearchVisible || (isFullscreen && fullscreenComponent === 'github-search')}
-          onClose={() => updateState({ isSearchVisible: false, githubSearchQuery: undefined })}
-          inputRef={searchInputRef}
-          autoSearchQuery={state.githubSearchQuery}
-          onQueryProcessed={() => updateState({ githubSearchQuery: undefined })}
-        />
+        {state.activeView !== 'github-search' && (
+          <SearchPanel
+            isVisible={state.isSearchVisible || (isFullscreen && fullscreenComponent === 'github-search')}
+            onClose={() => updateState({ isSearchVisible: false, githubSearchQuery: undefined })}
+            inputRef={searchInputRef}
+            autoSearchQuery={state.githubSearchQuery}
+            onQueryProcessed={() => updateState({ githubSearchQuery: undefined })}
+          />
+        )}
 
         <LazyWrapper fallback={<LazyLoadingSpinner />}>
           <LazyWorkbenchPanel

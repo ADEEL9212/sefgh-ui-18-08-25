@@ -41,9 +41,10 @@ interface SearchPanelProps {
   inputRef?: React.RefObject<HTMLInputElement>;
   autoSearchQuery?: string;
   onQueryProcessed?: () => void;
+  asMainView?: boolean; // New prop to indicate if it's used as main view
 }
 
-export const SearchPanel = ({ isVisible, onClose, inputRef, autoSearchQuery, onQueryProcessed }: SearchPanelProps) => {
+export const SearchPanel = ({ isVisible, onClose, inputRef, autoSearchQuery, onQueryProcessed, asMainView = false }: SearchPanelProps) => {
   const [searchState, setSearchState] = useState<SearchState>({
     query: '',
     repositories: [],
@@ -227,11 +228,13 @@ export const SearchPanel = ({ isVisible, onClose, inputRef, autoSearchQuery, onQ
   return (
     <>
       <div className={`
-        ${isComponentFullscreen 
-          ? 'fixed inset-0 w-full z-50 bg-background' 
-          : 'fixed lg:static inset-0 lg:inset-auto w-full sm:w-96 lg:w-[600px] xl:w-[800px] bg-surface lg:bg-sidebar border-l border-border z-40 lg:z-auto'
+        ${asMainView 
+          ? 'w-full h-full bg-background relative' 
+          : isComponentFullscreen 
+            ? 'fixed inset-0 w-full z-50 bg-background' 
+            : 'fixed lg:static inset-0 lg:inset-auto w-full sm:w-96 lg:w-[600px] xl:w-[800px] bg-surface lg:bg-sidebar border-l border-border z-40 lg:z-auto'
         }
-        animate-slide-in-right
+        ${!asMainView ? 'animate-slide-in-right' : ''}
         flex flex-col
         transition-all duration-300 ease-in-out
       `}>
