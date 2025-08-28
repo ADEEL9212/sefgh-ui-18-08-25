@@ -1,0 +1,551 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  html, body {
+    font-family: "Figtree", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  * {
+    font-family: inherit;
+  }
+  
+  /* Utility classes for different font weights */
+  .figtree-light {
+    font-weight: 300;
+  }
+  
+  .figtree-regular {
+    font-weight: 400;
+  }
+  
+  .figtree-medium {
+    font-weight: 500;
+  }
+  
+  .figtree-semibold {
+    font-weight: 600;
+  }
+  
+  .figtree-bold {
+    font-weight: 700;
+  }
+  
+  .figtree-black {
+    font-weight: 900;
+  }
+}
+
+@layer base {
+  :root {
+    /* Cosmic Harmony - "Cosmic Dawn" Light Theme */
+    /* Base colors */
+    --background: 220 25% 97%;  /* #F5F7FA - Clean, airy background */
+    --foreground: 225 25% 20%;  /* #2A3040 - Rich dark text */
+
+    /* Surface colors */
+    --surface: 220 30% 95%;     /* #EDF1F8 - Subtle surface */
+    --surface-elevated: 0 0% 100%; /* #FFFFFF - Pure white elevated */
+    --surface-glass: 220 30% 95%;
+    --surface-glass-opacity: 0.8;
+
+    /* Card colors */
+    --card: 0 0% 100%;          /* #FFFFFF - Clean white */
+    --card-foreground: 225 25% 20%; /* #2A3040 - Same as foreground */
+
+    /* Popover colors */
+    --popover: 0 0% 100%;       /* #FFFFFF - Clean white */
+    --popover-foreground: 225 25% 20%; /* #2A3040 - Rich dark text */
+
+    /* Brand colors - Vibrant Indigo */
+    --brand: 250 95% 60%;       /* #6C5CE7 - Vibrant indigo */
+    --brand-foreground: 0 0% 100%; /* #FFFFFF - White text */
+    --brand-muted: 250 95% 60%;
+    --brand-muted-opacity: 0.1;
+
+    /* Primary colors - Vibrant Indigo */
+    --primary: 250 95% 60%;     /* #6C5CE7 - Vibrant indigo */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF - White text */
+
+    /* Secondary colors */
+    --secondary: 240 10% 94%;   /* #EFF0F5 - Soft lilac-gray */
+    --secondary-foreground: 240 10% 40%; /* #6A6D7C - Secondary text */
+
+    /* Muted colors */
+    --muted: 240 10% 94%;       /* #EFF0F5 - Same as secondary */
+    --muted-foreground: 240 5% 45%;   /* Light muted text */
+
+    /* Accent colors - Vibrant Cyan */
+    --accent: 190 95% 50%;      /* #0ABDE3 - Fresh cyan */
+    --accent-foreground: 0 0% 100%; /* #FFFFFF - White text */
+
+    /* Destructive colors */
+    --destructive: 350 95% 65%; /* #FF5E7D - Softer red */
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF - White text */
+
+    /* Warning colors */
+    --warning: 35 95% 60%;      /* #FFC048 - Warm amber */
+    --warning-foreground: 225 25% 20%; /* #2A3040 - Dark text */
+
+    /* Border and input */
+    --border: 225 25% 20%;             /* Border color */
+    --input: 240 10% 94%;       /* #EFF0F5 - Same as muted */
+    --ring: 250 95% 60%;        /* #6C5CE7 - Primary indigo */
+
+    --radius: 0.5rem;
+
+    /* Sidebar colors */
+    --sidebar-background: 250 30% 15%; /* #252045 - Dark indigo */
+    --sidebar-foreground: 0 0% 100%;   /* #FFFFFF - White text */
+    --sidebar-primary: 250 95% 60%;    /* #6C5CE7 - Vibrant indigo */
+    --sidebar-primary-foreground: 0 0% 100%; /* #FFFFFF - White text */
+    --sidebar-accent: 250 30% 25%;     /* #3A3366 - Lighter sidebar accent */
+    --sidebar-accent-foreground: 0 0% 100%; /* #FFFFFF - White text */
+    --sidebar-border: 0 0% 100%;       /* Sidebar border */
+    --sidebar-ring: 190 95% 50%;       /* #0ABDE3 - Cyan */
+  }
+
+  .dark {
+    /* Cosmic Harmony - "Cosmic Night" Dark Theme */
+    /* Base colors */
+    --background: 225 30% 8%;    /* #111322 - Deep space blue-black */
+    --foreground: 220 25% 95%;   /* #F0F2F8 - Soft white text */
+
+    /* Surface colors */
+    --surface: 225 30% 12%;      /* #1A1D33 - Slightly lighter than bg */
+    --surface-elevated: 225 25% 18%; /* #262C45 - Elevated surfaces */
+    --surface-glass: 225 30% 8%;
+    --surface-glass-opacity: 0.8;
+
+    /* Card colors */
+    --card: 225 30% 15%;         /* #20244A - Deep blue-purple */
+    --card-foreground: 220 25% 95%; /* #F0F2F8 - Soft white text */
+
+    /* Popover colors */
+    --popover: 225 30% 18%;      /* #262C45 - Elevated blue */
+    --popover-foreground: 220 25% 95%; /* #F0F2F8 - Soft white */
+
+    /* Brand colors */
+    --brand: 250 95% 70%;        /* #876AFF - Brighter indigo */
+    --brand-foreground: 220 25% 10%; /* #161829 - Very dark blue */
+    --brand-muted: 250 95% 70%;
+    --brand-muted-opacity: 0.15;
+
+    /* Primary colors */
+    --primary: 250 95% 70%;      /* #876AFF - Brighter indigo */
+    --primary-foreground: 220 25% 10%; /* #161829 - Very dark blue */
+
+    /* Secondary colors */
+    --secondary: 225 30% 20%;    /* #292E57 - Deep blue secondary */
+    --secondary-foreground: 220 25% 80%; /* #C3C9E0 - Light gray-blue */
+
+    /* Muted colors */
+    --muted: 225 30% 20%;        /* #292E57 - Same as secondary */
+    --muted-foreground: 220 25% 70%;   /* Muted light text */
+
+    /* Accent colors - Vibrant Cyan */
+    --accent: 190 95% 55%;       /* #18C1F0 - Bright cyan */
+    --accent-foreground: 220 25% 10%; /* #161829 - Very dark blue */
+
+    /* Destructive colors */
+    --destructive: 350 95% 70%;  /* #FF7A92 - Bright red */
+    --destructive-foreground: 220 25% 10%; /* #161829 - Very dark blue */
+
+    /* Warning colors */
+    --warning: 35 95% 65%;       /* #FFCC60 - Bright amber */
+    --warning-foreground: 220 25% 10%; /* #161829 - Very dark blue */
+
+    /* Border and input */
+    --border: 220 25% 70%;             /* Light color */
+    --input: 225 30% 20%;        /* #292E57 - Same as secondary */
+    --ring: 190 95% 55%;         /* #18C1F0 - Bright cyan */
+
+    /* Sidebar colors */
+    --sidebar-background: 225 30% 10%; /* #141625 - Darker than main bg */
+    --sidebar-foreground: 220 25% 90%; /* #DFE3F3 - Light text */
+    --sidebar-primary: 250 95% 70%;    /* #876AFF - Brighter indigo */
+    --sidebar-primary-foreground: 225 30% 10%; /* #141625 - Dark blue */
+    --sidebar-accent: 225 30% 15%;     /* #20244A - Dark accent */
+    --sidebar-accent-foreground: 220 25% 90%; /* #DFE3F3 - Light text */
+    --sidebar-border: 220 25% 90%;     /* Light sidebar border */
+    --sidebar-ring: 190 95% 55%;       /* #18C1F0 - Bright cyan */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Custom scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-md;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+
+  /* Dark mode scrollbar */
+  .dark ::-webkit-scrollbar-track {
+    @apply bg-surface;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/40;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/60;
+  }
+}
+
+@layer components {
+  /* Modern UI Design Enhancement - Cosmic Harmony */
+  
+  /* Gradient System */
+  .gradient-background {
+    background: linear-gradient(120deg, hsl(var(--background)), hsl(220 30% 94%));
+  }
+  
+  .dark .gradient-background {
+    background: linear-gradient(120deg, hsl(var(--background)), hsl(225 30% 11%));
+  }
+  
+  .gradient-sidebar {
+    background: linear-gradient(180deg, 
+      hsl(250 30% 13%), 
+      hsl(250 30% 17%));
+  }
+  
+  .dark .gradient-sidebar {
+    background: linear-gradient(180deg, 
+      hsl(225 30% 8%), 
+      hsl(225 30% 12%));
+  }
+  
+  .card-gradient {
+    background: linear-gradient(145deg, 
+      hsl(var(--card)), 
+      hsl(var(--card)));
+    opacity: 0.8;
+  }
+  
+  .card-elevated {
+    background: linear-gradient(145deg, 
+      hsl(var(--surface-elevated)), 
+      hsl(var(--surface-elevated)));
+    opacity: 0.9;
+  }
+  
+  .btn-gradient-primary {
+    background: linear-gradient(90deg, 
+      hsl(var(--primary)), 
+      hsl(215 95% 65%));
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-gradient-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, 
+      hsl(215 95% 65%),
+      hsl(var(--primary)));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .btn-gradient-primary:hover::after {
+    opacity: 1;
+  }
+  
+  /* Shadow System */
+  :root {
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 3px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.16);
+  }
+  
+  .dark {
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 3px 8px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  
+  .shadow-elevation-1 { box-shadow: var(--shadow-sm); }
+  .shadow-elevation-2 { box-shadow: var(--shadow-md); }
+  .shadow-elevation-3 { box-shadow: var(--shadow-lg); }
+  .shadow-elevation-4 { box-shadow: var(--shadow-xl); }
+  
+  /* Soft Element System - Reduced Border Usage */
+  .soft-element {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .dark .soft-element {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Glassmorphism Elements */
+  .glass-panel {
+    background: hsl(var(--background));
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--background));
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    opacity: 0.7;
+  }
+  
+  .dark .glass-panel {
+    background: hsl(var(--background));
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--background));
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    opacity: 0.7;
+  }
+
+  /* Glass effect utilities */
+  .glass-effect {
+    @apply backdrop-blur-lg bg-surface-glass border border-border/50;
+  }
+  
+  /* Border Radius System */
+  :root {
+    --radius-sm: 0.25rem;  /* 4px */
+    --radius-md: 0.5rem;   /* 8px */
+    --radius-lg: 0.75rem;  /* 12px */
+    --radius-xl: 1rem;     /* 16px */
+    --radius-2xl: 1.5rem;  /* 24px */
+    --radius-full: 9999px; /* For pills and avatars */
+  }
+  
+  .pill-element {
+    border-radius: var(--radius-full);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Organic Shapes */
+  .blob-decoration {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+    background: hsl(var(--primary));
+    opacity: 0.05;
+    filter: blur(40px);
+    z-index: -1;
+    animation: blob-morph 15s linear infinite;
+  }
+  
+  @keyframes blob-morph {
+    0%, 100% {
+      border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+    }
+    25% {
+      border-radius: 25% 75% 47% 53% / 68% 36% 64% 32%;
+    }
+    50% {
+      border-radius: 39% 61% 47% 53% / 38% 63% 37% 62%;
+    }
+    75% {
+      border-radius: 73% 27% 46% 54% / 54% 72% 28% 46%;
+    }
+  }
+  
+  /* Neumorphic Elements */
+  .neumorphic-light {
+    background: hsl(var(--background));
+    box-shadow:
+      8px 8px 16px rgba(0, 0, 0, 0.05),
+      -8px -8px 16px rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-md);
+  }
+  
+  .dark .neumorphic-light {
+    background: hsl(var(--background));
+    box-shadow:
+      8px 8px 16px rgba(0, 0, 0, 0.25),
+      -8px -8px 16px rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    background: linear-gradient(90deg, 
+      hsl(var(--primary)), 
+      hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  /* Modern Input Fields */
+  .modern-input {
+    @apply border-none bg-surface/50 rounded-lg shadow-sm px-4 py-2.5;
+    @apply focus:ring-2 focus:ring-primary/30 focus:shadow-elevation-2;
+    @apply transition-all duration-200;
+  }
+  
+  .input-wrapper {
+    @apply relative;
+  }
+  
+  .input-icon {
+    @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground;
+  }
+  
+  .input-with-icon {
+    @apply pl-10;
+  }
+  
+  /* Ambient Background Effects */
+  .ambient-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .ambient-bg::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.03) 0%,
+      transparent 40%
+    );
+    animation: ambient-rotate 60s linear infinite;
+    z-index: -1;
+  }
+  
+  @keyframes ambient-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Panel resize handle */
+  .resize-handle {
+    @apply w-1 bg-border hover:bg-accent cursor-col-resize transition-colors relative;
+  }
+
+  .resize-handle:hover::after {
+    content: '';
+    @apply absolute inset-y-0 -left-1 -right-1 bg-accent/20;
+  }
+
+  /* Message bubble animations */
+  .message-bubble {
+    @apply animate-fade-in-up;
+  }
+
+  /* Loading skeleton */
+  .skeleton {
+    @apply bg-muted animate-pulse-fast rounded;
+  }
+
+  /* Rainbow text effect */
+  .rainbow-text {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbow-shine 3s ease-in-out infinite;
+  }
+
+  /* Notification styles */
+  .notification {
+    @apply fixed top-4 right-4 z-50 animate-slide-in-right;
+  }
+
+  /* Mobile-specific utilities */
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .mobile-pull-to-refresh {
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Touch-friendly buttons */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Mobile-optimized text selection */
+  .mobile-text {
+    -webkit-touch-callout: default;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Line clamp utility for mobile */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Mobile-safe viewport */
+  .mobile-viewport {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  }
+
+  /* Mobile-friendly animations */
+  @media (prefers-reduced-motion: no-preference) {
+    .mobile-bounce {
+      animation: mobile-bounce 0.6s ease-in-out;
+    }
+  }
+
+  /* Smooth scrolling for mobile */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+}
