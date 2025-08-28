@@ -10,6 +10,10 @@ import { ChatService } from '@/services/chatService';
 import { LazyWrapper, LazyLoadingSpinner } from './common/LazyComponents';
 import { WorkbenchData } from './workbench/WorkbenchPanel';
 import { FullscreenProvider, useFullscreen } from '@/contexts/FullscreenContext';
+import { AppShell } from './layout/AppShell';
+import { Dashboard } from './layout/Dashboard';
+import { SplitViewLayout } from './layout/SplitViewLayout';
+import { FloatingActionMenu } from './layout/FloatingActionMenu';
 
 // Lazy load heavy components for better mobile performance
 const LazyNavigationPanel = lazy(() => 
@@ -100,7 +104,7 @@ const initialState: AppState = {
   isNavOpen: false,
   isSearchVisible: false,
   isWorkbenchOpen: false,
-  activeView: 'chat',
+  activeView: 'home',
   selectedVersion: 'v3',
   selectedLanguage: 'en',
   messages: [],
@@ -583,14 +587,64 @@ export const MainAppContent = () => {
   const renderActivePanel = () => {
     switch (state.activeView) {
       case 'chat':
+        return (
+          <SplitViewLayout
+            title="AI Chat"
+            contextTitle="Chat Context"
+            showContext={true}
+            contextPanel={
+              <div className="p-4 space-y-4">
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-sm">Current Session</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2 text-xs">
+                    <p className="text-muted-foreground">
+                      Messages: {state.messages.length}
+                    </p>
+                    <p className="text-muted-foreground">
+                      Model: {state.selectedVersion.toUpperCase()}
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            }
+          >
+            <ChatManager 
+              key={chatKey}
+              initialView="chat"
+              onViewChange={(view) => setActiveView(view)}
+              onOpenWorkbench={openWorkbench}
+              onToggleGithubSearch={() => updateState({ isSearchVisible: !state.isSearchVisible })}
+            />
+          </SplitViewLayout>
+        );
       case 'history':
         return (
-          <ChatManager 
-            key={chatKey} // Add this line
-            initialView={state.activeView as 'chat' | 'history'}
-            onViewChange={(view) => setActiveView(view)}
-            onOpenWorkbench={openWorkbench}
-            onToggleGithubSearch={() => updateState({ isSearchVisible: !state.isSearchVisible })}
+          <SplitViewLayout
+            title="Chat History"
+            contextTitle="Session Details"
+            showContext={true}
+          >
+            <LazyWrapper>
+              <ChatManager 
+                key={chatKey}
+                initialView="history"
+                onViewChange={(view) => setActiveView(view)}
+                onOpenWorkbench={openWorkbench}
+                onToggleGithubSearch={() => updateState({ isSearchVisible: !state.isSearchVisible })}
+              />
+            </LazyWrapper>
+          </SplitViewLayout>
+        );
+      case 'home':
+      case 'dashboard':
+        return (
+          <Dashboard
+            userName="Florence"
+            onNavigate={setActiveView}
+            onNewChat={handleNewChat}
+            onToggleSearch={() => updateState({ isSearchVisible: !state.isSearchVisible })}
           />
         );
       case 'language':
@@ -656,85 +710,57 @@ export const MainAppContent = () => {
         );
       default:
         return (
-          <LazyWrapper>
-            <LazyAllPagesPanel onNavigate={setActiveView} />
-          </LazyWrapper>
+          <Dashboard
+            userName="Florence"
+            onNavigate={setActiveView}
+            onNewChat={handleNewChat}
+            onToggleSearch={() => updateState({ isSearchVisible: !state.isSearchVisible })}
+          />
         );
     }
   };
 
   return (
-    <div className="h-screen flex flex-col bg-background text-foreground mobile-viewport">
-      <AppHeader
-        theme={state.theme}
-        selectedVersion={state.selectedVersion}
-        onThemeToggle={toggleTheme}
-        onNavToggle={() => updateState({ isNavOpen: !state.isNavOpen })}
-        onSearchToggle={() => updateState({ isSearchVisible: !state.isSearchVisible })}
-        onVersionChange={(version) => {
-          updateState({ selectedVersion: version });
-          toast({
-            title: `Switched to ${version.toUpperCase()}`,
-            description: "AI model version updated",
-            duration: 2000,
-          });
-        }}
-      />
-
-      <main className="flex-1 flex pt-14 overflow-hidden relative">
-        {/* Mobile overlay for navigation/search panels - hide in fullscreen */}
-        {(state.isNavOpen || state.isSearchVisible) && !isFullscreen && (
-          <div 
-            className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-            onClick={() => updateState({ isNavOpen: false, isSearchVisible: false })}
-          />
-        )}
-
-        {/* Navigation panel - hide in fullscreen */}
-        {!isFullscreen && (
-          <LazyWrapper fallback={<LazyLoadingSpinner />}>
-            <LazyNavigationPanel
-              isOpen={state.isNavOpen}
-              activeView={state.activeView}
-              theme={state.theme}
-              onViewChange={setActiveView}
-              onThemeToggle={toggleTheme}
-              onClose={() => updateState({ isNavOpen: false })}
-            />
-          </LazyWrapper>
-        )}
-
-        <div className="flex-1 flex overflow-hidden">
-          {/* Main content area - hide in fullscreen when showing panels */}
-          {!(isFullscreen && (fullscreenComponent === 'github-search' || fullscreenComponent === 'workbench')) && (
-            <div className="flex-1 overflow-hidden min-w-0">
-              {renderActivePanel()}
-            </div>
-          )}
-
-          <SearchPanel
-            isVisible={state.isSearchVisible || (isFullscreen && fullscreenComponent === 'github-search')}
-            onClose={() => updateState({ isSearchVisible: false, githubSearchQuery: undefined })}
-            inputRef={searchInputRef}
-            autoSearchQuery={state.githubSearchQuery}
-            onQueryProcessed={() => updateState({ githubSearchQuery: undefined })}
-          />
-
-          <LazyWrapper fallback={<LazyLoadingSpinner />}>
-            <LazyWorkbenchPanel
-              isOpen={state.isWorkbenchOpen || (isFullscreen && fullscreenComponent === 'workbench')}
-              workbench={state.currentWorkbench}
-              hasUnsavedChanges={state.hasUnsavedChanges}
-              onClose={closeWorkbench}
-              onSave={saveWorkbench}
-              onContentChange={updateWorkbenchContent}
-              onTitleChange={updateWorkbenchTitle}
-              onModeChange={updateWorkbenchMode}
-              onLanguageChange={updateWorkbenchLanguage}
-            />
-          </LazyWrapper>
+    <AppShell
+      theme={state.theme}
+      onThemeToggle={toggleTheme}
+      activeView={state.activeView}
+      onViewChange={setActiveView}
+    >
+      <div className="h-full flex overflow-hidden relative">
+        {/* Main content area */}
+        <div className="flex-1 overflow-hidden min-w-0">
+          {renderActivePanel()}
         </div>
-      </main>
+
+        <SearchPanel
+          isVisible={state.isSearchVisible || (isFullscreen && fullscreenComponent === 'github-search')}
+          onClose={() => updateState({ isSearchVisible: false, githubSearchQuery: undefined })}
+          inputRef={searchInputRef}
+          autoSearchQuery={state.githubSearchQuery}
+          onQueryProcessed={() => updateState({ githubSearchQuery: undefined })}
+        />
+
+        <LazyWrapper fallback={<LazyLoadingSpinner />}>
+          <LazyWorkbenchPanel
+            isOpen={state.isWorkbenchOpen || (isFullscreen && fullscreenComponent === 'workbench')}
+            workbench={state.currentWorkbench}
+            hasUnsavedChanges={state.hasUnsavedChanges}
+            onClose={closeWorkbench}
+            onSave={saveWorkbench}
+            onContentChange={updateWorkbenchContent}
+            onTitleChange={updateWorkbenchTitle}
+            onModeChange={updateWorkbenchMode}
+            onLanguageChange={updateWorkbenchLanguage}
+          />
+        </LazyWrapper>
+      </div>
+
+      <FloatingActionMenu
+        onNavigate={setActiveView}
+        onNewChat={handleNewChat}
+        onToggleSearch={() => updateState({ isSearchVisible: !state.isSearchVisible })}
+      />
 
       <KeyboardShortcuts
         onFocusSearchInput={focusSearchInput}
@@ -744,7 +770,7 @@ export const MainAppContent = () => {
         onNewChat={handleNewChat}
         onToggleTheme={toggleTheme}
       />
-    </div>
+    </AppShell>
   );
 };
 
