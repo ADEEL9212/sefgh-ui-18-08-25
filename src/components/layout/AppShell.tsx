@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { X, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -30,10 +30,32 @@ export const AppShell: React.FC<AppShellProps> = ({
   onViewChange 
 }) => {
   const [tabs, setTabs] = useState<Tab[]>([
-    { id: 'home', title: 'Home', content: children, canClose: false }
+    { id: 'home', title: 'Home', content: null, canClose: false } // Initialize content as null
   ]);
   const [activeTab, setActiveTab] = useState('home');
   const [navExpanded, setNavExpanded] = useState(true);
+
+  // Update the home tab content and title when children or activeView changes
+  useEffect(() => {
+    const getViewTitle = (view: string) => {
+      switch (view) {
+        case 'github-search': return 'Github Search';
+        case 'chat': return 'Chat';
+        case 'history': return 'History';
+        case 'dashboard':
+        case 'home': return 'Home';
+        default: return view.charAt(0).toUpperCase() + view.slice(1);
+      }
+    };
+
+    setTabs(prev => prev.map(tab => 
+      tab.id === 'home' ? { 
+        ...tab, 
+        content: children,
+        title: getViewTitle(activeView)
+      } : tab
+    ));
+  }, [children, activeView]);
 
   const addTab = useCallback((tab: Tab) => {
     setTabs(prev => [...prev, tab]);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Search, Command } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Command as CommandPrimitive, CommandItem, CommandList, CommandEmpty, CommandGroup } from '@/components/ui/command';
 
@@ -15,6 +15,13 @@ interface CommandAction {
 
 interface CommandPaletteProps {
   onCommand: (command: CommandAction) => void;
+}
+
+interface CommandItem {
+  id: string;
+  label: string;
+  description: string;
+  target?: string;
 }
 
 export const CommandPalette: React.FC<CommandPaletteProps> = ({ onCommand }) => {
@@ -64,7 +71,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ onCommand }) => 
     )
   })).filter(group => group.items.length > 0);
 
-  const handleSelect = useCallback((command: any) => {
+  const handleSelect = useCallback((command: CommandItem) => {
     setIsOpen(false);
     setQuery('');
     
@@ -96,6 +103,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ onCommand }) => 
           <DialogHeader className="p-4 pb-0">
             <div className="flex items-center gap-2">
               <Command className="h-4 w-4 text-muted-foreground" />
+              <DialogTitle className="sr-only">Command Palette</DialogTitle>
               <Input
                 className="border-none bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-base p-0"
                 placeholder="Search or run a command..."

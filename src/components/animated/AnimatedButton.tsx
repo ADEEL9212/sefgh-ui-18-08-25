@@ -25,7 +25,7 @@ export const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   ...props
 }) => {
   const getAnimationVariants = () => {
-    const variants: any = {};
+    const variants: Record<string, unknown> = {};
     
     if (animation === 'tap') {
       Object.assign(variants, buttonTap);

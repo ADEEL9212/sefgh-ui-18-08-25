@@ -79,7 +79,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
       title: 'GitHub Search',
       description: 'Find repositories and code',
       color: 'bg-gradient-to-br from-emerald-500 to-teal-600',
-      onClick: onToggleSearch,
+      onClick: () => onNavigate('github-search'),
     },
     {
       icon: Clock,
@@ -232,7 +232,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
               <Button 
                 variant="outline" 
                 className="w-full justify-start"
-                onClick={onToggleSearch}
+                onClick={() => onNavigate('github-search')}
               >
                 <Search className="mr-2 h-4 w-4" />
                 Search GitHub
