@@ -166,11 +166,11 @@ export const MainAppContent = () => {
           githubSearchQuery: undefined,
           hasUnsavedChanges: false,
           // Parse dates for persistent state
-          messages: persistentState.messages?.map((msg: any) => ({
+          messages: persistentState.messages?.map((msg: Message & { timestamp: string }) => ({
             ...msg,
             timestamp: new Date(msg.timestamp),
           })) || [],
-          consoleLogs: persistentState.consoleLogs?.map((log: any) => ({
+          consoleLogs: persistentState.consoleLogs?.map((log: LogEntry & { timestamp: string }) => ({
             ...log,
             timestamp: new Date(log.timestamp),
           })) || [],
@@ -221,8 +221,8 @@ export const MainAppContent = () => {
       info: console.info,
     };
 
-    const createLogCapture = (type: LogEntry['type'], originalFn: Function) => {
-      return (...args: any[]) => {
+    const createLogCapture = (type: LogEntry['type'], originalFn: (...args: unknown[]) => void) => {
+      return (...args: unknown[]) => {
         originalFn.apply(console, args);
         const message = args.map(arg => 
           typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
