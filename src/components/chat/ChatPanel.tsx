@@ -182,7 +182,14 @@ const ChatPanelContent = ({
     });
   };
   const handleVoiceSearch = () => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    interface SpeechRecognitionWindow extends Window {
+      SpeechRecognition?: typeof SpeechRecognition;
+      webkitSpeechRecognition?: typeof SpeechRecognition;
+    }
+    
+    const speechWindow = window as SpeechRecognitionWindow;
+    const SpeechRecognition = speechWindow.SpeechRecognition || speechWindow.webkitSpeechRecognition;
+    
     if (!SpeechRecognition) {
       alert("Voice search is not supported by your browser.");
       return;
@@ -192,7 +199,7 @@ const ChatPanelContent = ({
     recognition.interimResults = false;
     recognition.lang = 'en-US';
     setIsListening(true);
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
       const transcript = event.results[0][0].transcript;
       setInput(prev => prev + (prev ? ' ' : '') + transcript);
       setIsListening(false);

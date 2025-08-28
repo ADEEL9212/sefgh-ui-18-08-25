@@ -23,6 +23,7 @@ import { MetricsBar } from '../visualizations/MetricsBar';
 import { VisualizationCharts } from '../visualizations/VisualizationCharts';
 import { 
   EnhancedRepository, 
+  Repository,
   SearchType, 
   SearchState, 
   SearchMetrics 
@@ -107,7 +108,7 @@ export const SearchPanel = ({ isVisible, onClose, inputRef, autoSearchQuery, onQ
       const searchTime = Date.now() - startTime;
       
       // Enhance repositories with similarity scores
-      const enhancedRepos: EnhancedRepository[] = (data.items || []).map((repo: any) => ({
+      const enhancedRepos: EnhancedRepository[] = (data.items || []).map((repo: Repository) => ({
         ...repo,
         similarity: generateSimilarityMetrics(),
         downloadUrls: {

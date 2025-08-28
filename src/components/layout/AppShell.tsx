@@ -173,12 +173,28 @@ export const AppShell: React.FC<AppShellProps> = ({
             variant="ghost"
             size="sm"
             className="px-3 text-muted-foreground hover:text-foreground"
-            onClick={() => addTab({
-              id: `tab-${Date.now()}`,
-              title: 'New Tab',
-              content: <div className="p-6 text-center text-muted-foreground">New tab content</div>,
-              canClose: true
-            })}
+            onClick={() => {
+              const newTabId = `chat-${Date.now()}`;
+              addTab({
+                id: newTabId,
+                title: 'New Chat',
+                content: (
+                  <div className="h-full flex flex-col items-center justify-center p-6 text-center">
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold">New Chat Session</h3>
+                      <p className="text-muted-foreground">Start a conversation or ask a question</p>
+                      <Button 
+                        onClick={() => onViewChange('new-chat')}
+                        className="mt-4"
+                      >
+                        Start Chat
+                      </Button>
+                    </div>
+                  </div>
+                ),
+                canClose: true
+              });
+            }}
           >
             <Plus className="h-4 w-4" />
           </Button>
