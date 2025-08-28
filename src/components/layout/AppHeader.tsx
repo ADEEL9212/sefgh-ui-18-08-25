@@ -7,6 +7,9 @@ import { AccountSettingsPanel } from '../settings/AccountSettingsPanel';
 import { KeyboardShortcuts } from '../common/KeyboardShortcuts';
 import { LayoutGrid, Search, Sun, Moon, User, Github, ChevronDown, Share2, Menu } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { AnimatedButton, AnimatedText, AnimatedIcon } from '@/components/animated';
+import { motion } from 'framer-motion';
+import { slideInFromTop } from '@/lib/animations';
 interface AppHeaderProps {
   theme: 'light' | 'dark';
   selectedVersion: string;
@@ -61,21 +64,29 @@ export const AppHeader = ({
     label: 'SEFGH v3.0',
     description: 'Advanced model with contextual understanding.'
   }];
-  return <header className="fixed top-0 left-0 right-0 z-50 h-14 glass-effect border-b">
+  return <motion.header 
+    className="fixed top-0 left-0 right-0 z-50 h-14 glass-effect border-b shadow-elevation-2" 
+    variants={slideInFromTop}
+    initial="hidden"
+    animate="visible"
+  >
       <div className="h-full flex items-center justify-between px-4">
         {/* Left side */}
         <div className="flex items-center gap-3">
           {/* Mobile hamburger menu */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button 
+              <AnimatedButton 
                 variant="ghost" 
                 size="sm" 
                 onClick={onNavToggle}
                 className="md:hidden min-h-[44px] min-w-[44px] p-2"
+                animation="tap"
               >
-                <Menu className="h-5 w-5" />
-              </Button>
+                <AnimatedIcon animation="hover">
+                  <Menu className="h-5 w-5" />
+                </AnimatedIcon>
+              </AnimatedButton>
             </TooltipTrigger>
             <TooltipContent>
               <p>Open Menu</p>
@@ -84,15 +95,21 @@ export const AppHeader = ({
 
           {/* Desktop branding and version selector */}
           <div className="flex items-center gap-3">
-            <div className="text-lg md:text-xl font-bold bg-gradient-to-r from-brand to-accent bg-clip-text text-transparent">
+            <AnimatedText 
+              className="text-lg md:text-xl font-bold gradient-text"
+              animation="slideIn"
+              gradient={true}
+            >
               SEFGH-AI
-            </div>
+            </AnimatedText>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="gap-2 hidden md:flex">
+                <AnimatedButton variant="ghost" size="sm" className="gap-2 hidden md:flex" animation="tap">
                   {versions.find(v => v.id === selectedVersion)?.label}
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
+                  <AnimatedIcon animation="hover">
+                    <ChevronDown className="h-4 w-4" />
+                  </AnimatedIcon>
+                </AnimatedButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-80">
                 {versions.map(version => <DropdownMenuItem key={version.id} onClick={() => onVersionChange(version.id)} className={`flex flex-col items-start gap-1 p-4 ${selectedVersion === version.id ? 'bg-accent' : ''}`}>
@@ -126,9 +143,17 @@ export const AppHeader = ({
           {/* Desktop action buttons */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" size="sm" onClick={() => window.open('https://github.com/sefgh-ai', '_blank')} className="hidden md:flex min-h-[44px] min-w-[44px]">
-                <Github className="h-4 w-4 text-gray-600" />
-              </Button>
+              <AnimatedButton 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => window.open('https://github.com/sefgh-ai', '_blank')} 
+                className="hidden md:flex min-h-[44px] min-w-[44px]"
+                animation="glow"
+              >
+                <AnimatedIcon animation="hover">
+                  <Github className="h-4 w-4 text-gray-600" />
+                </AnimatedIcon>
+              </AnimatedButton>
             </TooltipTrigger>
             <TooltipContent>
               <p>GitHub Repository</p>
@@ -137,14 +162,17 @@ export const AppHeader = ({
           
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button 
+              <AnimatedButton 
                 variant="ghost" 
                 size="sm" 
                 onClick={onNavToggle}
                 className="hidden md:flex min-h-[44px] min-w-[44px]"
+                animation="tap"
               >
-                <LayoutGrid className="h-4 w-4 text-blue-500" />
-              </Button>
+                <AnimatedIcon animation="hover">
+                  <LayoutGrid className="h-4 w-4 text-blue-500" />
+                </AnimatedIcon>
+              </AnimatedButton>
             </TooltipTrigger>
             <TooltipContent>
               <p>Toggle Navigation</p>
@@ -153,14 +181,17 @@ export const AppHeader = ({
           
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button 
+              <AnimatedButton 
                 variant="ghost" 
                 size="sm" 
                 onClick={onSearchToggle}
                 className="hidden md:flex min-h-[44px] min-w-[44px]"
+                animation="tap"
               >
-                <Search className="h-4 w-4 text-green-500" />
-              </Button>
+                <AnimatedIcon animation="pulse">
+                  <Search className="h-4 w-4 text-green-500" />
+                </AnimatedIcon>
+              </AnimatedButton>
             </TooltipTrigger>
             <TooltipContent>
               <p>Toggle GitHub Search</p>
@@ -169,14 +200,18 @@ export const AppHeader = ({
           
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button 
+              <AnimatedButton 
                 variant="ghost" 
                 size="sm" 
                 onClick={onThemeToggle} 
                 className="hidden md:flex min-h-[44px] min-w-[44px]"
+                animation="glow"
+                cosmic={true}
               >
-                {theme === 'dark' ? <Sun className="h-4 w-4 text-yellow-500" /> : <Moon className="h-4 w-4 text-purple-500" />}
-              </Button>
+                <AnimatedIcon animation="hover">
+                  {theme === 'dark' ? <Sun className="h-4 w-4 text-yellow-500" /> : <Moon className="h-4 w-4 text-purple-500" />}
+                </AnimatedIcon>
+              </AnimatedButton>
             </TooltipTrigger>
             <TooltipContent>
               <p>Switch to {theme === 'dark' ? 'light' : 'dark'} mode</p>
@@ -235,5 +270,5 @@ export const AppHeader = ({
       <AccountSettingsPanel isOpen={isAccountSettingsOpen} onClose={() => setIsAccountSettingsOpen(false)} />
       
       <KeyboardShortcuts isOpen={isKeyboardShortcutsOpen} onClose={() => setIsKeyboardShortcutsOpen(false)} onToggleTheme={onThemeToggle} onToggleNav={onNavToggle} onToggleSearch={onSearchToggle} />
-    </header>;
+    </motion.header>;
 };

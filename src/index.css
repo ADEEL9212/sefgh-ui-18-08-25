@@ -218,9 +218,234 @@ All colors MUST be HSL.
 }
 
 @layer components {
+  /* Modern UI Design Enhancement - Cosmic Harmony */
+  
+  /* Gradient System */
+  .gradient-background {
+    background: linear-gradient(120deg, hsl(var(--background)), hsl(220 30% 94%));
+  }
+  
+  .dark .gradient-background {
+    background: linear-gradient(120deg, hsl(var(--background)), hsl(225 30% 11%));
+  }
+  
+  .gradient-sidebar {
+    background: linear-gradient(180deg, 
+      hsl(250 30% 13%), 
+      hsl(250 30% 17%));
+  }
+  
+  .dark .gradient-sidebar {
+    background: linear-gradient(180deg, 
+      hsl(225 30% 8%), 
+      hsl(225 30% 12%));
+  }
+  
+  .card-gradient {
+    background: linear-gradient(145deg, 
+      hsl(var(--card)), 
+      hsl(var(--card) / 0.8));
+  }
+  
+  .card-elevated {
+    background: linear-gradient(145deg, 
+      hsl(var(--surface-elevated) / 0.9), 
+      hsl(var(--surface-elevated)));
+  }
+  
+  .btn-gradient-primary {
+    background: linear-gradient(90deg, 
+      hsl(var(--primary)), 
+      hsl(215 95% 65%));
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-gradient-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, 
+      hsl(215 95% 65%),
+      hsl(var(--primary)));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .btn-gradient-primary:hover::after {
+    opacity: 1;
+  }
+  
+  /* Shadow System */
+  :root {
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 3px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.16);
+  }
+  
+  .dark {
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 3px 8px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  
+  .shadow-elevation-1 { box-shadow: var(--shadow-sm); }
+  .shadow-elevation-2 { box-shadow: var(--shadow-md); }
+  .shadow-elevation-3 { box-shadow: var(--shadow-lg); }
+  .shadow-elevation-4 { box-shadow: var(--shadow-xl); }
+  
+  /* Soft Element System - Reduced Border Usage */
+  .soft-element {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .dark .soft-element {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Glassmorphism Elements */
+  .glass-panel {
+    background: hsl(var(--background) / 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--background) / 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dark .glass-panel {
+    background: hsl(var(--background) / 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--background) / 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+
   /* Glass effect utilities */
   .glass-effect {
     @apply backdrop-blur-lg bg-surface-glass border border-border/50;
+  }
+  
+  /* Border Radius System */
+  :root {
+    --radius-sm: 0.25rem;  /* 4px */
+    --radius-md: 0.5rem;   /* 8px */
+    --radius-lg: 0.75rem;  /* 12px */
+    --radius-xl: 1rem;     /* 16px */
+    --radius-2xl: 1.5rem;  /* 24px */
+    --radius-full: 9999px; /* For pills and avatars */
+  }
+  
+  .pill-element {
+    border-radius: var(--radius-full);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Organic Shapes */
+  .blob-decoration {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+    background: hsl(var(--primary) / 0.05);
+    filter: blur(40px);
+    z-index: -1;
+    animation: blob-morph 15s linear infinite;
+  }
+  
+  @keyframes blob-morph {
+    0%, 100% {
+      border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+    }
+    25% {
+      border-radius: 25% 75% 47% 53% / 68% 36% 64% 32%;
+    }
+    50% {
+      border-radius: 39% 61% 47% 53% / 38% 63% 37% 62%;
+    }
+    75% {
+      border-radius: 73% 27% 46% 54% / 54% 72% 28% 46%;
+    }
+  }
+  
+  /* Neumorphic Elements */
+  .neumorphic-light {
+    background: hsl(var(--background));
+    box-shadow:
+      8px 8px 16px rgba(0, 0, 0, 0.05),
+      -8px -8px 16px rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-md);
+  }
+  
+  .dark .neumorphic-light {
+    background: hsl(var(--background));
+    box-shadow:
+      8px 8px 16px rgba(0, 0, 0, 0.25),
+      -8px -8px 16px rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    background: linear-gradient(90deg, 
+      hsl(var(--primary)), 
+      hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  /* Modern Input Fields */
+  .modern-input {
+    @apply border-none bg-surface/50 rounded-lg shadow-sm px-4 py-2.5;
+    @apply focus:ring-2 focus:ring-primary/30 focus:shadow-elevation-2;
+    @apply transition-all duration-200;
+  }
+  
+  .input-wrapper {
+    @apply relative;
+  }
+  
+  .input-icon {
+    @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground;
+  }
+  
+  .input-with-icon {
+    @apply pl-10;
+  }
+  
+  /* Ambient Background Effects */
+  .ambient-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .ambient-bg::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle at center,
+      hsl(var(--primary) / 0.03) 0%,
+      transparent 40%
+    );
+    animation: ambient-rotate 60s linear infinite;
+    z-index: -1;
+  }
+  
+  @keyframes ambient-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   /* Panel resize handle */

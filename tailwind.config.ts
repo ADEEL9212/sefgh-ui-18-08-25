@@ -194,6 +194,14 @@ export default {
 				'mobile-bounce': 'mobile-bounce 0.6s ease-in-out',
 				'pull-to-refresh': 'pull-to-refresh 0.3s ease-out'
 			},
+			borderRadius: {
+				'sm': 'var(--radius-sm)',
+				'md': 'var(--radius-md)', 
+				'lg': 'var(--radius-lg)',
+				'xl': 'var(--radius-xl)',
+				'2xl': 'var(--radius-2xl)',
+				'full': 'var(--radius-full)'
+			},
 			backdropBlur: {
 				xs: '2px'
 			}
