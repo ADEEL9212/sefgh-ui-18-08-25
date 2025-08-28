@@ -3,6 +3,18 @@
  * Central hub for all Easter egg functionality
  */
 
+import { 
+  initializeConsoleMessages,
+  showWelcomeMessage,
+  showRandomTip,
+  showRandomSecret,
+  showCredits,
+  showDevelopmentInfo,
+  showEasterEggHints
+} from './console-messages';
+import { initializeCosmicMode, toggleCosmicMode } from './cosmic-mode';
+import { createKonamiCode } from './konami';
+
 export { createKonamiCode, KonamiCode } from './konami';
 export { 
   initializeConsoleMessages, 
@@ -36,7 +48,7 @@ export function initializeAllEasterEggs(): void {
   
   // Add global easter egg functions to window for easy access
   if (typeof window !== 'undefined') {
-    (window as any).easterEggs = {
+    (window as typeof window & { easterEggs: Record<string, unknown> }).easterEggs = {
       cosmic: toggleCosmicMode,
       konami: konamiCode,
       console: {
