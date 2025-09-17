@@ -285,7 +285,7 @@ export const SearchPanel = ({ isVisible, onClose, inputRef, autoSearchQuery, onQ
 
         {/* Results */}
         <div 
-          ref={elementRef}
+          ref={elementRef as React.RefObject<HTMLDivElement>}
           className="flex-1 overflow-y-auto mobile-pull-to-refresh p-4 space-y-4"
         >
           {/* Pull to refresh indicator */}

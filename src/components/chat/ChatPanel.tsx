@@ -183,34 +183,34 @@ const ChatPanelContent = ({
   };
   const handleVoiceSearch = () => {
     interface SpeechRecognitionWindow extends Window {
-      SpeechRecognition?: typeof SpeechRecognition;
-      webkitSpeechRecognition?: typeof SpeechRecognition;
+      SpeechRecognition?: any;
+      webkitSpeechRecognition?: any;
     }
     
     const speechWindow = window as SpeechRecognitionWindow;
-    const SpeechRecognition = speechWindow.SpeechRecognition || speechWindow.webkitSpeechRecognition;
+    const SpeechRecognitionConstructor = speechWindow.SpeechRecognition || speechWindow.webkitSpeechRecognition;
     
-    if (!SpeechRecognition) {
+    if (!SpeechRecognitionConstructor) {
       alert("Voice search is not supported by your browser.");
       return;
     }
-    const recognition = new SpeechRecognition();
+    const recognition = new SpeechRecognitionConstructor();
     recognition.continuous = false;
     recognition.interimResults = false;
     recognition.lang = 'en-US';
     setIsListening(true);
-    recognition.onresult = (event: SpeechRecognitionEvent) => {
+    recognition.onresult = (event: any) => {
       const transcript = event.results[0][0].transcript;
       setInput(prev => prev + (prev ? ' ' : '') + transcript);
       setIsListening(false);
     };
     recognition.onerror = () => {
       setIsListening(false);
-      toast({
-        title: "Voice recognition error",
-        description: "Failed to recognize speech. Please try again.",
-        duration: 3000
-      });
+      // toast({
+      //   title: "Voice recognition error",
+      //   description: "Failed to recognize speech. Please try again."
+      // });
+      console.error("Voice recognition error");
     };
     recognition.onend = () => {
       setIsListening(false);

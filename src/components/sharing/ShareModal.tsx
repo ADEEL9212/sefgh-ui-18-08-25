@@ -85,7 +85,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
         title: title.trim(),
         description: description.trim() || null,
         link_type: linkType,
-        content: content,
+        content: JSON.stringify(content),
         content_type: contentType,
         user_id: user.id,
         max_views: maxViews ? parseInt(maxViews) : null,

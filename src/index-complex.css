@@ -209,7 +209,7 @@ All colors MUST be HSL.
 
   /* Dark mode scrollbar */
   .dark ::-webkit-scrollbar-track {
-    @apply bg-surface;
+    @apply bg-muted;
   }
 
   .dark ::-webkit-scrollbar-thumb {
@@ -219,7 +219,6 @@ All colors MUST be HSL.
   .dark ::-webkit-scrollbar-thumb:hover {
     @apply bg-muted-foreground/60;
   }
-}
 
 @layer components {
   /* Modern UI Design Enhancement - Cosmic Harmony */

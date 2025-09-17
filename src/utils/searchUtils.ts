@@ -40,6 +40,7 @@ export const getSearchHistory = (): SearchHistory[] => {
     return history.map((item: StoredSearchHistory) => ({
       ...item,
       timestamp: new Date(item.timestamp),
+      searchType: (item.type === 'exhaustive' ? 'exhaustive' : 'quick') as SearchType, // Use valid SearchType values
     }));
   } catch (error) {
     console.error('Failed to load search history:', error);

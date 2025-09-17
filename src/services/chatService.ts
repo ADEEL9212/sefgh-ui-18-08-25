@@ -297,9 +297,9 @@ export class ChatService {
       return {
         ...chatData,
         timestamp: new Date(chatData.timestamp),
-        messages: chatData.messages.map((msg: { id: string; type: 'user' | 'assistant'; content: string; timestamp: string }) => ({
+        messages: chatData.messages.map((msg: any) => ({
           ...msg,
-          timestamp: new Date(msg.timestamp)
+          timestamp: msg.timestamp instanceof Date ? msg.timestamp : new Date(msg.timestamp)
         }))
       };
     } catch (error) {

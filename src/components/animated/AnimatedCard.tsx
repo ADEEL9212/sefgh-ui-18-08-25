@@ -5,11 +5,11 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Card, CardProps } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { cardHover, fadeIn, getMotionVariants } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 
-interface AnimatedCardProps extends CardProps {
+interface AnimatedCardProps extends React.HTMLAttributes<HTMLDivElement> {
   animation?: 'fadeIn' | 'cardHover' | 'none';
   useGradient?: boolean;
   useGlass?: boolean;
@@ -62,7 +62,7 @@ export const AnimatedCard: React.FC<AnimatedCardProps> = ({
       initial="initial"
       animate="visible"
       whileHover="hover"
-      {...props}
+      {...(props as any)}
     >
       {children}
     </MotionCard>

@@ -42,11 +42,12 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
     })();
 
     // Add delay to the animation
-    if (delay > 0 && baseVariants.visible) {
+    if (delay > 0 && baseVariants.visible && typeof baseVariants.visible === 'object') {
+      const visibleVariant = baseVariants.visible as any;
       baseVariants.visible = {
-        ...baseVariants.visible,
+        ...visibleVariant,
         transition: {
-          ...baseVariants.visible.transition,
+          ...visibleVariant.transition,
           delay,
         },
       };

@@ -25,18 +25,18 @@ export const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   ...props
 }) => {
   const getAnimationVariants = () => {
-    const variants: Record<string, unknown> = {};
+    let variants = {};
     
     if (animation === 'tap') {
-      Object.assign(variants, buttonTap);
+      variants = { ...variants, ...buttonTap };
     }
     
     if (animation === 'pulse' || cosmic) {
-      Object.assign(variants, pulseOnHover);
+      variants = { ...variants, ...pulseOnHover };
     }
     
     if (animation === 'glow' || cosmic) {
-      Object.assign(variants, glowOnHover);
+      variants = { ...variants, ...glowOnHover };
     }
     
     return variants;
@@ -61,7 +61,7 @@ export const AnimatedButton: React.FC<AnimatedButtonProps> = ({
       initial="initial"
       whileHover="hover"
       whileTap="tap"
-      {...props}
+      {...(props as any)}
     >
       {cosmic && (
         <motion.div
